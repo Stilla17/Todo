@@ -1,67 +1,114 @@
-import React, { useEffect, useState } from 'react'
-import Button from '../Button/Button'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import Button from '../Button/Button';
+import axios from 'axios';
 
 const Content = () => {
+    const [data, setData] = useState([]);
+    const [newStudent, setNewStudent] = useState('');
+    const [newImg, setNewImg] = useState('');
+    const [editId, setEditId] = useState(null); // Используем editId вместо edit
 
-    const [data, setData] = useState([])
-    const [open, setOpen] = useState(false)
-    const [newStudent, setNewStudent] = useState('')
-    const apiStudent = import.meta.env.VITE_STUDENT_API
+    const apiStudent = import.meta.env.VITE_STUDENT_API;
 
-
-    const hundlePostDataToApi = (e) => {
-        e.preventDefault()
-        setData(newStudent)
-
-        axios.post(apiStudent, data)
-            .then(res => {
-                setData([...data, res.data])
-                setNewStudent("")
-            }).catch((error) => console.log(error)
-            )
-    }
-
+    // Получение данных при загрузке
     useEffect(() => {
-        axios.get(apiStudent).then(res => {
-            console.log(res.data);
-            setData(res.data)
-        }).catch((error) => console.log(error)
-        )
-    }, [])
+        axios.get(apiStudent)
+            .then(res => {
+                console.log("API Response:", res.data);
+                setData(Array.isArray(res.data) ? res.data : []);
+            })
+            .catch(error => console.log("Ошибка загрузки:", error));
+    }, [apiStudent]);
 
+    // Добавление нового студента
+    const handlePostDataToApi = (e) => {
+        e.preventDefault();
+        if (!newStudent.trim() || !newImg.trim()) return;
 
+        axios.post(apiStudent, { task: newStudent, urlimg: newImg })
+            .then(res => {
+                setData(prevData => [...prevData, res.data]); // Добавляем нового студента в список
+                setNewStudent('');
+                setNewImg('');
+            })
+            .catch(error => console.log("Ошибка при добавлении:", error));
+    };
 
+    // Удаление студента
+    const handleDeleteDataToApi = (id) => {
+        axios.delete(`${apiStudent}/${id}`)
+            .then(() => {
+                setData(prevData => prevData.filter(student => student.id !== id)); // Убираем удалённого студента
+            })
+            .catch(error => console.log("Ошибка при удалении:", error));
+    };
+
+    // Редактирование студента
+    const handleEditDataToApi = (e) => {
+        e.preventDefault();
+        if (!newStudent.trim() || !newImg.trim()) return;
+
+        axios.put(`${apiStudent}/${editId}`, { task: newStudent, urlimg: newImg })
+            .then(res => {
+                setData(prevData =>
+                    prevData.map(student =>
+                        student.id === editId ? res.data : student // Обновляем только изменённый объект
+                    )
+                );
+                setNewStudent('');
+                setNewImg('');
+                setEditId(null); // Выход из режима редактирования
+            })
+            .catch(error => console.log("Ошибка при редактировании:", error));
+    };
+
+    // Установка данных в форму для редактирования
+    const editData = (student) => {
+        setEditId(student.id);
+        setNewImg(student.urlimg);
+        setNewStudent(student.task);
+    };
 
     return (
         <div className='mx-auto max-w-[900px] mt-10'>
-
-            <button onClick={() => setOpen(!open)} className='bg-green-400'>click</button>
-
             <div>
-                <form onSubmit={hundlePostDataToApi}>
+                <form onSubmit={editId ? handleEditDataToApi : handlePostDataToApi} className="flex gap-2">
                     <input
                         type="text"
-                        placeholder='add new student'
+                        placeholder='Enter student name'
                         value={newStudent}
-                        onChange={(e) => setNewStudent(e.target.value)} />
-                    <Button text={"Add Student"} className={'bg-green-400'} />
+                        onChange={(e) => setNewStudent(e.target.value)}
+                        className="border rounded p-2"
+                    />
+                    <input
+                        type="text"
+                        placeholder='Enter image URL'
+                        value={newImg}
+                        onChange={(e) => setNewImg(e.target.value)}
+                        className="border rounded p-2"
+                    />
+                    <Button text={editId ? "Update Student" : "Add Student"} className={'bg-green-400'} />
                 </form>
 
-                {
-                    data.map((item, index) => (
-                        <div key={index} className='flex items-center gap-2 border border-gray-400 rounded-md justify-between p-2 mt-4'>
-                            <p>{item.task}</p>
+                {data.length > 0 ? (
+                    data.map((item) => (
+                        <div key={item.id} className='flex items-center gap-2 border border-gray-400 rounded-md justify-between p-2 mt-4'>
+                            <div className='flex gap-5 items-center'>
+                                <img className='w-[100px] h-[100px] rounded-full' src={item.urlimg} alt={item.task} />
+                                <p>{item.task}</p>
+                            </div>
                             <div className='flex gap-4'>
-                                <Button text={"Delete"} className={'bg-red-400'} />
-                                <Button text={"Edit"} className={'bg-orange-400'} />
+                                <Button onClick={() => handleDeleteDataToApi(item.id)} text={"Delete"} className={'bg-red-400'} />
+                                <Button onClick={() => editData(item)} text={"Edit"} className={'bg-orange-400'} />
                             </div>
                         </div>
                     ))
-                }
+                ) : (
+                    <p className="text-gray-500 mt-4">Нет студентов</p>
+                )}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Content
+export default Content;
