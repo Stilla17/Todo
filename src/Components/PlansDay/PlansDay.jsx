@@ -81,7 +81,7 @@ const PlansDay = () => {
                         onChange={(e) => setNewImg(e.target.value)}
                         className="border rounded p-2"
                     />
-                    <Button text={editId ? "Update Plan" : "Add Plan"} className={'bg-green-400'} />
+                    <Button text={editId ? "Update Plan" : "Add Plan +"} className={'bg-green-400'} />
                 </form>
 
                 {data.length > 0 ? (

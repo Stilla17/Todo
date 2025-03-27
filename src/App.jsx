@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import PlansDay from './Components/PlansDay/PlansDay'
+import Header from './Components/Header/Header'
 
 function App() {
 
   return (
     <>
-      <header>
-
-      </header>
+      <Header/>
       <main>
         <section>
-          <PlansDay/>
+          {/* <PlansDay/> */}
         </section>
       </main>
     </>
