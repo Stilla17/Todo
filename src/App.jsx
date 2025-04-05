@@ -1,21 +1,24 @@
 import { useState } from 'react'
-import Content from './Components/Content/Content'
-import Nav from './Components/Nav/Nav'
+import { Route, Router, Routes } from 'react-router'
+import Dashboard from './Pages/Dashboard'
+import Plans from './Pages/Plans'
+import Calendar from './Pages/Calendar'
+import Layout from './Pages/Layout'
 
 function App() {
 
   return (
     <>
-      <header>
-        <Nav />
-      </header>
-      <main>
-        <section>
-          <Content />
-        </section>
-      </main>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path='plans' element={<Plans />} />
+          <Route path='calendar' element={<Calendar />} />
+        </Route>
+
+      </Routes>
     </>
   )
 }
 
-export default App
+export default App;
