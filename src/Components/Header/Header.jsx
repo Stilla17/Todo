@@ -1,6 +1,5 @@
 import React from 'react'
 
-import ThemeToggle from '../ThemeToogle'
 
 const Header = () => {
   return (
@@ -10,7 +9,6 @@ const Header = () => {
         <input type="text"
           placeholder='Search'
           className='px-[20px] rounded py-[10px] bg-[#DEF7E5]' />
-        <ThemeToggle />
       </div>
     </header>
   )

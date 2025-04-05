@@ -2,7 +2,8 @@ import React from "react";
 import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
 import { FaFlagCheckered, FaEnvelope, FaBook, FaCalendarAlt, FaSignOutAlt } from "react-icons/fa";
-import { Link } from "react-router";
+import ThemeButton from "../ThemeButton/ThemeButton";
+
 
 const Nav = () => {
   return (
@@ -18,7 +19,8 @@ const Nav = () => {
           <ul className="flex flex-col gap-4">
             <li className="flex items-center gap-2">
               <FaFlagCheckered />
-              <Link to='plans'>Plans</Link>
+              
+              <a href="#">Plans</a>
             </li>
             <li className="flex items-center gap-2">
               <FaFlagCheckered />
@@ -34,16 +36,16 @@ const Nav = () => {
             </li>
             <li className="flex items-center gap-2">
               <FaCalendarAlt />
-              <Link to='calendar'>Calendar</Link>
+              <a href="#">Calendar</a>
             </li>
+            <div className=" flex items-center justify-end gap-4 text-gray-700">
+              <a href="#">Log out</a>
+              <FaSignOutAlt />
+            </div>
           </ul>
-
-          <div className="mt-auto flex items-center justify-end gap-4 text-gray-700">
-            <a href="#">Log out</a>
-            <FaSignOutAlt />
-          </div>
         </div>
       </div>
+      {/* <ThemeButton/> */}
     </nav>
   );
 };
