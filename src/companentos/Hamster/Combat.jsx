@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import React from 'react'
+import { RxCross2 } from "react-icons/rx";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Buttons from './../buttons/Buttons.jsx';
 import HmasterCoin from './../../assets/img/Group.png';
 import GroupBGicoin from './../../assets/img/GroupBGicoin.png';
@@ -9,27 +13,112 @@ import Coins from './../../assets/img/Coins.png';
 import Mine from './../../assets/img/MIne.png';
 import hamster from './../../assets/img/hamster.png';
 import Binanse from './../../assets/img/Union.png';
-
+import DropCoin from './DropCoin.png';
 const Combat = () => {
-    const [count, setCount] = useState(0);
-    const [Boost, setBosst] = useState(6500);
+    const [state, setSate] = useState({ count: 15000, Boost: 6500,  isLvlOneActive: false, isLvlTwoActive: false, isLvlThreeActive: false, });
   
       // console.log(Boost);
 
+      const notifySuccess = () => {
+        toast.success('Operatsiya bajarildi !', {
+          position: "top-center",
+          autoClose: 3000, 
+          hideProgressBar: true, 
+          closeOnClick: true,
+          pauseOnHover: true, 
+        });
+      };
 
+      const notifyError = () => {
+        toast.error('Operatsiy bajarila olmaydi !', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      };
+
+      const handleLvlOne = () => {
+        setSate(prev => {
+         if (prev.count >= 1000){
+           notifySuccess()
+           return{
+            ...prev,
+            count: prev.count - 1000,  
+            isLvlOneActive: true
+           }
+         }else{
+           notifyError()
+           return prev;
+         }
+        })
+       }
+
+       const handleLvltWO = () => {
+        setSate(prev => {
+         if (prev.count >= 2500){
+           notifySuccess()
+           return{
+            ...prev,
+            count: prev.count - 2500,  
+            isLvlTwoActive: true
+           }
+         }else{
+           notifyError()
+           return prev;
+         }
+        })
+       }
+ 
+       const handleLvlThree  = () => {
+        setSate(prev => {
+         if (prev.count >= 6000){
+           notifySuccess()
+           return{
+            ...prev,
+            count: prev.count - 6000,  
+            isLvlThreeActive: true
+           }
+         }else{
+           notifyError()
+           return prev;
+         }
+        })
+       }
+    
       const handleHamster = () => {
-        setCount((count) => count + 1)
-        setBosst((Boost) => Boost - 1)
+        setSate(prev => {
+          if (prev.Boost < 0){
+            return prev
+          }
+
+          let counterr = 1
+
+          if (prev.isLvlOneActive){
+            counterr = 2
+          }else if(prev.isLvlTwoActive){
+            counterr = 3
+          }else if(prev.isLvlThreeActive){
+            counterr = 4
+          }
+
+          return {
+            count: prev.count + counterr,
+            Boost: prev.Boost - 1
+          }
+        })
       }
       
       useEffect(() => {
        const inturval = setInterval(() => {
-        setBosst(prev => {
-          if (prev < 6500) {
-            return prev + 1
-          }else{
-            return prev
+        setSate(prev => {
+          if (prev.Boost < 6500) {
+            return {...prev ,
+             Boost: prev.Boost + 1
+            }
           }
+            return prev
         })
        }, 3000)
   
@@ -37,20 +126,57 @@ const Combat = () => {
       }, [])
   
       const maxBoost = 6500
-      const boostPercent = (Boost / maxBoost) * 100
+      const boostPercent = (state.Boost / maxBoost) * 100
   
     return (
       <>
+      <ToastContainer />
         <div className="w-[428px] h-[926px] bg-[#2C2F35] rounded-[50px]">
           <div className="h-[60px] w-[100%]  flex justify-center items-end mb-[56px]">
             <h1 className="text-center text-white text-[16px] font-bold">Hamster Kombat</h1>
           </div>
           <div className="flex gap-[9px] justify-center items-center">
+            <details>
+              <summary className="list-none [&::-webkit-details-marker]:hidden">
             <Buttons
               text={"Earn per tap"}
               counter={"-"}
               Textclass={"text-[#F79841] w-[65px]"}
             />
+              </summary>
+
+              <div className="w-[240px] h-[223px] bg-[#2C2F35] shadow-[4px_4px_10px_5px_#00000040] rounded-[20px] flex flex-wrap gap-[14px] absolute mt-[19px] pl-[32px] pr-[22px] py-[42px]">
+                <div className="flex justify-end">
+                  <RxCross2 className="text-white font-bold text-[25px]"/>
+                </div>
+
+                <div onClick={handleLvlOne} className="bg-[#32363C] rounded-[15px] text-white text-[9px] flex items-center justify-between w-[190px] h-[27px] px-[8px]">
+                  <div className="flex gap-[12px] items-center">
+                    <div className="w-[28px] border-r-[0.50px] border-[#FFFFFF33] ">lvl 1</div>
+                    <h2 className="flex gap-[3px] text-[11px]">+2 <img className=" h-[15px] w-[15px]" src={DropCoin} alt="" /></h2>
+                  </div>
+                  <h2 className="text-[11px] flex">-1000 <img className="h-[15px] w-[15px]" src={DropCoin} alt="" /></h2>
+                </div>
+
+                <div onClick={handleLvltWO} className="bg-[#32363C] rounded-[15px] text-white text-[9px] flex items-center justify-between w-[190px] h-[27px] px-[8px]">
+                  <div className="flex gap-[12px] items-center">
+                    <div className="w-[28px] border-r-[0.50px] border-[#FFFFFF33] ">lvl 2</div>
+                    <h2 className="flex gap-[3px] text-[11px]">+3 <img className=" h-[15px] w-[15px]" src={DropCoin} alt="" /></h2>
+                  </div>
+                  <h2 className="text-[11px] flex">-2500 <img className="h-[15px] w-[15px]" src={DropCoin} alt="" /></h2>
+                </div>
+
+                <div onClick={handleLvlThree} className="bg-[#32363C] rounded-[15px] text-white text-[9px] flex items-center justify-between w-[190px] h-[27px] px-[8px]">
+                  <div className="flex gap-[12px] items-center">
+                    <div className="w-[28px] border-r-[0.50px] border-[#FFFFFF33] ">lvl 3</div>
+                    <h2 className="flex gap-[3px] text-[11px]">+4 <img className=" h-[15px] w-[15px]" src={DropCoin} alt="" /></h2>
+                  </div>
+                  <h2 className="text-[11px] flex">-6000 <img className="h-[15px] w-[15px]" src={DropCoin} alt="" /></h2>
+                </div>
+
+              </div>
+
+            </details>
             <Buttons
               text={"Coins to level up"}
               counter={"-"}
@@ -69,7 +195,7 @@ const Combat = () => {
           <div className="w-[100%] h-[529px] flex flex-wrap justify-center items-center">
             <h1 className="flex items-center justify-center gap-[8px] text-white text-[40px] font-bold w-[428px]">
               <img src={GroupBGicoin} alt="" />
-              {count}
+              {state.count}
             </h1>
   
               <img
@@ -85,11 +211,11 @@ const Combat = () => {
         <div className="border-red-500 border flex justify-between items-center mb-[22px] px-[10px]">
             <div className="flex gap-[9px]">
               <img src={Booost} alt="" />
-              <h2 className="font-bold text-white">6500/{Boost}</h2>
+              <h2 className="font-bold text-white">6500/{state.Boost}</h2>
             </div>
             <h2 className="text-white font-bold text-[14px]">Boost</h2>
           </div>
-          <div style={{width: `${boostPercent}%`}} className={`h-[10px] rounded-md bg-orange-500 transition-all duration-300  bg-gradient-to-r from-yellow-400 via-red-500 to-orange-500`}>
+          <div style={{width: `${boostPercent}%`, transition: 1} } className={`h-[10px] rounded-md bg-orange-500  transition-all duration-[1000ms] ease-in-out bg-gradient-to-r from-yellow-400 via-red-500 to-orange-500`}>
   
           </div>
         </div>
