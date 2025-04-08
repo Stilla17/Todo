@@ -12,7 +12,7 @@ const SignUp = () => {
               <h2 className='text-[64px] font-bold mb-[40px] text-center'>Sign Up</h2>
               <SignInput />
               <button className='bg-white rounded-[25px] px-[26px] py-[11px] flex items-center gap-[35px] text-[16px] mb-[71px]'>Upload avatar <LuUpload className='w-[24px] h-[24px]' /> </button>
-              <button className='bg-[#92E3A9] rounded-[10px] px-[39px] py-[20px] text-[26px] '>Registar</button>
+              <button className='bg-[#92E3A9] rounded-[10px] px-[39px] py-[20px] text-[26px]'>Registar</button>
             </div>
             <img src={FillBro} alt="" />
           </div>
