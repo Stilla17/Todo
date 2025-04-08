@@ -9,6 +9,10 @@ import SignUp from './Components/SignUp/SignUp'
 import SignIn from './Components/SignIn/SignIn'
 
 function App() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }
 
   return (
     <>
