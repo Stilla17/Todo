@@ -1,6 +1,7 @@
 import React from "react";
 import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
+import { Link } from "react-router"
 import { FaFlagCheckered, FaEnvelope, FaBook, FaCalendarAlt, FaSignOutAlt } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router";

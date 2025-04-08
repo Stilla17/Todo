@@ -1,11 +1,12 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 module.exports = {
-    content: ["./src/**/*.{js,jsx,ts,tsx}"],
-    theme: {
-        extend: {},
-    },
-    plugins: [require("daisyui")], // Добавляем плагин DaisyUI
+    plugins: [require("daisyui")],
     daisyui: {
-        themes: ["light", "dark", "synthwave", "cyberpunk"], // Указываем доступные темы
+      themes: true,
     },
+<<<<<<< HEAD
 };  
+=======
+  };
+  
+>>>>>>> 92ab926c238826515094b758fb5cb84a7912d3e7
