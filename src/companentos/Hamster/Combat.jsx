@@ -14,6 +14,10 @@ import Mine from './../../assets/img/MIne.png';
 import hamster from './../../assets/img/hamster.png';
 import Binanse from './../../assets/img/Union.png';
 import DropCoin from './DropCoin.png';
+import Exclude from './../../assets/img/Exclude.png';
+import x10 from './../../assets/img/x10.png';
+import Meme from './../../assets/img/Meme.png';
+
 const Combat = () => {
     const [state, setSate] = useState({ count: 15000, Boost: 6500,  isLvlOneActive: false, isLvlTwoActive: false, isLvlThreeActive: false, });
   
@@ -221,12 +225,40 @@ const Combat = () => {
         </div>
         
           <div className="flex gap-[10px] rounded-[8px] justify-center items-center w-[368px] h-[60px] mx-auto bg-[#32363CB2]">
-            <div className="w-[65px] h-[50px] flex flex-wrap items-center justify-center text-center rounded-[8px] text-white hover:bg-[#212429]">
+        <details>
+          <summary className="list-none [&::-webkit-details-marker]:hidden">
+          <div className="w-[65px] h-[50px] flex flex-wrap items-center justify-center text-center rounded-[8px] text-white hover:bg-[#212429]">
               <div className="w-[50px] flex justify-center">
               <img src={Binanse} alt="" />
               </div>
               <h2 className="text-[9px] font-bold">Exchange</h2>
             </div>
+          </summary>
+
+          <div className="bg-[#2C2F35] shadow-[4px_4px_10px_5px_#00000040] w-[375px] h-[502px] rounded-[20px] py-[35px] pl-[31px] pr-[25px] absolute mt-[-570px]">
+          <RxCross2 className="text-white font-bold text-[44px] "/>
+
+          <div>
+           
+          <div className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col gap-4 shadow-lg">
+             <div className="flex items-center gap-4 border-[#FFFFFF33] border-b mb-[20px]">
+                <img src={Exclude} alt="" />
+              <div>
+              <div className="text-lg font-bold">Тоp 10 cmc pairs</div>
+               <div className="text-sm text-gray-300">Profit per hour</div>
+               <div className="text-yellow-400 text-base flex gap-[2px]"><img src={DropCoin} alt="" /> 120</div>
+               </div>
+             </div>
+            <div className="flex items-center justify-between text-base">
+              <div className=" text-sm px-3 py-1 rounded-lg">lvl </div>
+              <div className="text-yellow-400 font-semibold">💰 </div>
+            </div>
+          </div>
+
+          </div>
+
+          </div>  
+        </details>
             <div className="w-[65px] h-[50px] flex flex-wrap items-center justify-center text-center rounded-[8px] text-white hover:bg-[#212429]">
               <div className="w-[50px] flex justify-center">
               <img src={Mine} alt="" />
