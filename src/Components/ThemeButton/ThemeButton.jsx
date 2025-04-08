@@ -6,9 +6,9 @@ const themes = ["light", "dark", "cupcake", "bumblebee", "synthwave", "retro"];
 const ThemeSwitcher = () => {
   return (
     <div className="p-4 flex flex-wrap gap-2">
-      {themes.map((themeName) => (
+      {/* {themes.map((themeName) => (
         <ThemeButton key={themeName} theme={themeName} />
-      ))}
+      ))} */}
     </div>
   );
 };

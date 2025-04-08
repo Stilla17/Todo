@@ -4,6 +4,7 @@ import Dashboard from './Pages/Dashboard'
 import Plans from './Pages/Plans'
 import Calendar from './Pages/Calendar'
 import Layout from './Pages/Layout'
+// import Themes from './Pages/Themes'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path='plans' element={<Plans />} />
           <Route path='calendar' element={<Calendar />} />
+          {/* <Route path='themes' element={<Themes/>}/> */}
         </Route>
 
       </Routes>
@@ -21,4 +23,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

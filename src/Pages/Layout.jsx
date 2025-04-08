@@ -8,9 +8,11 @@ const Layout = () => {
         <>
             <div className='flex'>
                 <Nav />
-                <div>
+                <div className='flex w-full flex-col '>
                     <Header />
-                    <Outlet />
+                    <div className='ml-[26%] mt-[120px] bg-amber-200'>
+                        <Outlet />
+                    </div>
                 </div>
             </div>
         </>
