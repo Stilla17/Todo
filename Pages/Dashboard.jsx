@@ -9,7 +9,8 @@ function Dashboard() {
     return (
         <main>
             <section>
-                <Content />
+                <PlansDay />
+                <PlansDiv />
             </section>
         </main>
     );
