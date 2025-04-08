@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "todo-list",
+=======
+  "name": "paket",
+>>>>>>> 368d5d56aa81431bbe5b0fd65755f53ae9f461cb
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@tailwindcss/vite": "^4.0.14",
     "axios": "^1.8.4",
     "react": "^19.0.0",
@@ -17,13 +22,23 @@
     "react-icons": "^5.5.0",
     "react-router": "^7.5.0",
     "tailwindcss": "^4.0.14"
+=======
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "styled-components": "^6.1.16"
+>>>>>>> 368d5d56aa81431bbe5b0fd65755f53ae9f461cb
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+<<<<<<< HEAD
     "@vitejs/plugin-react-swc": "^3.8.0",
     "daisyui": "^5.0.9",
+=======
+    "@vitejs/plugin-react": "^4.3.4",
+>>>>>>> 368d5d56aa81431bbe5b0fd65755f53ae9f461cb
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
