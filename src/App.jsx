@@ -5,6 +5,8 @@ import Plans from './Pages/Plans'
 import Settings from './Pages/Settings'
 import Movies from './Pages/Movies'
 import Layout from './Pages/Layout'
+import SignUp from './Components/SignUp/SignUp'
+import SignIn from './Components/SignIn/SignIn'
 
 function App() {
 
@@ -16,8 +18,9 @@ function App() {
           <Route path='plans' element={<Plans />} />
           <Route path='settings' element={<Settings />} />
           <Route path='movies' element={<Movies />} />
-
         </Route>
+        <Route path='signup' element={<SignUp />} />
+        <Route path='signin' element={<SignIn />} />
 
       </Routes>
     </>

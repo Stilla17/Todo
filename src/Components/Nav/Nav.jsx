@@ -39,7 +39,7 @@ const Nav = () => {
           <ul className="flex flex-col gap-4">
             {
               link.map((item, index) => (
-                <li className="flex items-center gap-2">
+                <li key={index} className="flex items-center gap-2">
                   {item.icon}
                   <Link to={item.path}>{item.link}</Link>
                 </li>
@@ -49,7 +49,7 @@ const Nav = () => {
           </ul>
 
           <div className="mt-auto flex items-center justify-end gap-4 text-gray-700">
-            <Link>Log Out</Link>
+            <Link to='signin'>Log Out</Link>
             <FaSignOutAlt />
           </div>
         </div>
