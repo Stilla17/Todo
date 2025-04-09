@@ -19,7 +19,19 @@ import x10 from './../../assets/img/x10.png';
 import Meme from './../../assets/img/Meme.png';
 
 const Combat = () => {
-    const [state, setSate] = useState({ count: 15000, Boost: 6500,  isLvlOneActive: false, isLvlTwoActive: false, isLvlThreeActive: false, });
+    const [state, setSate] = useState({
+       count: 20000, 
+       Boost: 6500,  
+       isLvlOneActive: false, 
+       isLvlTwoActive: false, 
+       isLvlThreeActive: false, 
+       EranTap: 1,
+       OneActive: false,
+       TwoActive: false,
+       threeActive: false, 
+       LevelOne: 120,
+       OnePrise: 192,
+      });
   
       // console.log(Boost);
 
@@ -90,29 +102,36 @@ const Combat = () => {
          }
         })
        }
-    
-      const handleHamster = () => {
-        setSate(prev => {
-          if (prev.Boost < 0){
-            return prev
-          }
-
-          let counterr = 1
-
-          if (prev.isLvlOneActive){
-            counterr = 2
-          }else if(prev.isLvlTwoActive){
-            counterr = 3
-          }else if(prev.isLvlThreeActive){
-            counterr = 4
-          }
-
-          return {
-            count: prev.count + counterr,
-            Boost: prev.Boost - 1
-          }
-        })
-      }
+       
+       const handleHamster = () => {
+         setSate(prev => {
+           if (prev.Boost < 0){
+             return prev
+            }
+            
+            let counterr = 1
+            
+            if (prev.isLvlOneActive){
+              counterr = 2
+            }else if(prev.isLvlTwoActive){
+              counterr = 3
+            }else if(prev.isLvlThreeActive){
+              counterr = 4
+            }
+            
+            return {
+              ...prev,
+              count: prev.count + counterr,
+              Boost: prev.Boost - 1
+            }
+          })
+        }
+        const getEarnTap = () => {
+         if (state.isLvlThreeActive) return '+4';
+         if (state.isLvlTwoActive) return '+3';
+         if (state.isLvlOneActive) return '+2';
+         return '+1';
+       };
       
       useEffect(() => {
        const inturval = setInterval(() => {
@@ -128,6 +147,44 @@ const Combat = () => {
   
        return () =>  clearInterval(inturval)
       }, [])
+
+
+      const ProfitHour =  () => {
+       setSate(prev => {
+        if (prev.count >= prev.OnePrise) {
+          notifySuccess()
+          return{
+           ...prev,
+           count: prev.count - prev.OnePrise, 
+           LevelOne: prev.LevelOne * 2,
+           OnePrise: prev.OnePrise * 2 
+          }
+        }else{
+          notifyError()
+          return prev;
+        }
+       })      
+      }
+      
+      useEffect(() => {
+        const interval  = setInterval(() => {
+          setSate(prev => ({
+            ...prev,
+            count: prev.count + prev.LevelOne
+          }))
+        }, 3600000);
+      
+        return () => clearInterval(interval)
+      }, [])
+
+
+
+
+      // const bomm = () => {
+      //   let utterance = new SpeechSynthesisUtterance("bombardino crokadilo chun chun chun chung sabiro");
+      //   speechSynthesis.speak(utterance);
+      // }
+
   
       const maxBoost = 6500
       const boostPercent = (state.Boost / maxBoost) * 100
@@ -144,7 +201,7 @@ const Combat = () => {
               <summary className="list-none [&::-webkit-details-marker]:hidden">
             <Buttons
               text={"Earn per tap"}
-              counter={"-"}
+              counter={getEarnTap()}
               Textclass={"text-[#F79841] w-[65px]"}
             />
               </summary>
@@ -189,7 +246,7 @@ const Combat = () => {
             />
             <Buttons
               text={"Profit per hour"}
-              counter={"-"}
+              counter={state.LevelOne}
               Textclass={"text-[#84CB69]"}
             />
           </div>
@@ -212,7 +269,7 @@ const Combat = () => {
         {/* foter */}
   
         <div className="mb-[22px] px-[5px]">
-        <div className="border-red-500 border flex justify-between items-center mb-[22px] px-[10px]">
+        <div className="border-red-500 flex justify-between items-center mb-[22px] px-[10px]">
             <div className="flex gap-[9px]">
               <img src={Booost} alt="" />
               <h2 className="font-bold text-white">6500/{state.Boost}</h2>
@@ -238,20 +295,71 @@ const Combat = () => {
           <div className="bg-[#2C2F35] shadow-[4px_4px_10px_5px_#00000040] w-[375px] h-[502px] rounded-[20px] py-[35px] pl-[31px] pr-[25px] absolute mt-[-570px]">
           <RxCross2 className="text-white font-bold text-[44px] "/>
 
-          <div>
+          <div className="flex flex-wrap gap-[12px] mt-[25px]">
            
-          <div className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col gap-4 shadow-lg">
-             <div className="flex items-center gap-4 border-[#FFFFFF33] border-b mb-[20px]">
-                <img src={Exclude} alt="" />
+          <div onClick={ProfitHour} className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
+             <div className="flex items-center gap-4 border-[#FFFFFF33] border-b h-[54px]">
+                <img className="w-[56px] h-[32px]" src={Exclude} alt="" />
               <div>
-              <div className="text-lg font-bold">Тоp 10 cmc pairs</div>
-               <div className="text-sm text-gray-300">Profit per hour</div>
-               <div className="text-yellow-400 text-base flex gap-[2px]"><img src={DropCoin} alt="" /> 120</div>
+
+             <div className="w-[118px] h-[42px] ">
+                
+               <div className="text-[9px] font-bold">Тоp 10 cmc pairs</div>
+               <div className="text-[7px] text-gray-300">Profit per hour</div>
+               <div className="text-yellow-400 text-[8px] flex gap-[2px]"><img className="w-[11px] h-[11px]" src={DropCoin} alt="" /> {state.LevelOne}</div>
+
+             </div>
+
                </div>
              </div>
-            <div className="flex items-center justify-between text-base">
-              <div className=" text-sm px-3 py-1 rounded-lg">lvl </div>
-              <div className="text-yellow-400 font-semibold">💰 </div>
+
+            <div className="flex items-center gap-[12px] text-base h-[24px]">
+              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl 1</div>
+              <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> {state.OnePrise}</div>
+            </div>
+          </div>
+
+          <div className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
+             <div className="flex items-center gap-4 border-[#FFFFFF33] border-b h-[54px]">
+                <img className="w-[48px] h-[48px]" src={Meme} alt="" />
+              <div>
+
+             <div className="w-[118px] h-[42px] ">
+                
+               <div className="text-[9px] font-bold">Mene Coin</div>
+               <div className="text-[7px] text-gray-300">Profit per hour</div>
+               <div className="text-yellow-400 text-[8px] flex gap-[2px]"><img className="w-[11px] h-[11px]" src={DropCoin} alt="" /> 375</div>
+
+             </div>
+
+               </div>
+             </div>
+
+            <div className="flex items-center gap-[12px] text-base h-[24px]">
+              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl 1</div>
+              <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> 2.3K</div>
+            </div>
+          </div>
+
+          <div className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
+             <div className="flex items-center gap-4 border-[#FFFFFF33] border-b h-[54px]">
+                <img className="w-[32px] h-[15px]" src={x10} alt="" />
+              <div>
+
+             <div className="w-[118px] h-[42px] ">
+                
+               <div className="text-[9px] font-bold">Margin trading x10</div>
+               <div className="text-[7px] text-gray-300">Profit per hour</div>
+               <div className="text-yellow-400 text-[8px] flex gap-[2px]"><img className="w-[11px] h-[11px]" src={DropCoin} alt="" /> 997</div>
+
+             </div>
+
+               </div>
+             </div>
+
+            <div className="flex items-center gap-[12px] text-base h-[24px]">
+              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl 1</div>
+              <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> 11.2K</div>
             </div>
           </div>
 
@@ -286,6 +394,7 @@ const Combat = () => {
           </div>
   
         </div>
+        {/* <img onClick={bomm} className="rounded-[50px]" src="https://i1.sndcdn.com/artworks-4fPGk176hMQgdghK-zFMj5Q-t500x500.jpg" alt="" /> */}
       </>
     );
 }
