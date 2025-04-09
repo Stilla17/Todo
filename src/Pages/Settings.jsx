@@ -15,14 +15,26 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
-      {themes.map((item, index) => (
-        <div key={index}>
-          <button data-theme={item}
-            onClick={() => changeTheme(item)}
-            className="btn capitalize m-1"
+    <div className="grid grid-cols-4 gap-4 p-4">
+      {themes.map((theme, index) => (
+        <div
+          key={index}
+          data-theme={theme}
+          className="theme-preview rounded-lg border border-base-300 p-4 flex flex-col items-center justify-between shadow h-40"
+        >
+          <div className="text-sm font-semibold capitalize mb-2">{theme}</div>
+          <div className="flex gap-1 mb-2">
+            <div className="w-5 h-5 rounded-full bg-primary"></div>
+            <div className="w-5 h-5 rounded-full bg-secondary"></div>
+            <div className="w-5 h-5 rounded-full bg-accent"></div>
+            <div className="w-5 h-5 rounded-full bg-neutral"></div>
+            <div className="w-5 h-5 rounded-full bg-base-100 border"></div>
+          </div>
+          <button
+            onClick={() => changeTheme(theme)}
+            className="btn btn-xs"
           >
-            {item}
+            Apply
           </button>
         </div>
       ))}

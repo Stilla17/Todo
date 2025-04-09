@@ -4,9 +4,4 @@ module.exports = {
     daisyui: {
       themes: true,
     },
-<<<<<<< HEAD
 };  
-=======
-  };
-  
->>>>>>> 92ab926c238826515094b758fb5cb84a7912d3e7

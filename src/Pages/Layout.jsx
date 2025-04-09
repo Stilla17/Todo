@@ -10,7 +10,7 @@ const Layout = () => {
                 <Nav />
                 <div className='flex w-full flex-col '>
                     <Header />
-                    <div className='ml-[26%] mt-[120px] bg-amber-200'>
+                    <div className='ml-[26%] h-[calc(100vh-120px)] overflow-y-auto mt-[120px] pr-4'>
                         <Outlet />
                     </div>
                 </div>
