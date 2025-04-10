@@ -7,6 +7,7 @@ import Movies from './Pages/Movies'
 import Layout from './Pages/Layout'
 import SignUp from './Components/SignUp/SignUp'
 import SignIn from './Components/SignIn/SignIn'
+import Cars from './Pages/Cars'
 
 function App() {
   const savedTheme = localStorage.getItem("theme");
@@ -20,6 +21,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path='plans' element={<Plans />} />
+          <Route path='cars' element={<Cars />} />
           <Route path='settings' element={<Settings />} />
           <Route path='movies' element={<Movies />} />
         </Route>
