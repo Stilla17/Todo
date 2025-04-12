@@ -17,6 +17,11 @@ const link = [
     icon: <FaBook />
   },
   {
+    link: "Cars",
+    path: "cars",
+    icon: <FaFlagCheckered />
+  },
+  {
     link: "Settings",
     path: "settings",
     icon: <IoMdSettings />
