@@ -7,7 +7,6 @@ const Cars = () => {
     const apiCars = import.meta.env.VITE_BOKS_API
     const [data, setData] = useState([]);
 
-
     const {
         register,
         handleSubmit,
@@ -33,6 +32,7 @@ const Cars = () => {
                 carM: formData.carM,
                 telNumber: formData.tel,
                 urlImg: formData.urlImg,
+                PynetMthod: formData.PynetMthod
             })
             .then((response) => {
                 setData((prevData) => [...prevData, response.data]);
@@ -69,18 +69,29 @@ const Cars = () => {
                             <p className="text-red-500">Phone number is required</p>
                         )}
                         <select className="border-1 border-white w-[200px] px-[5px] mb-[10px] focus:outline-none text-white font-bold bg-indigo-500" {...register("carM", { required: true })}>
-                            <option>Kobalt</option>
-                            <option>Spark</option>
-                            <option>Matiz</option>
-                            <option>Nexiya</option>
-                            <option>Malibu</option>
-                            <option>Treker</option>
+                            <option value="Kobalt">Kobalt</option>
+                            <option value="Spark">Spark</option>
+                            <option value="Matiz">Matiz</option>
+                            <option value="Nexiya">Nexiya</option>
+                            <option value="Malibu">Malibu</option>
+                            <option value="Treker">Treker</option>
                         </select>
                         {errors.carM && <p className="text-red-500">Car model is required</p>}
                         <div className="w-[200px] text-white font-bold mb-[10px]">
-                            <input type="radio" /><label>Karta</label><br />
-                            <input type="radio" /><label>Naxt</label><br />
-                            <input type="radio" /><label>Nasiya</label>
+                            <label>
+                                <input type="radio" {...register('PynetMthod')} value="Karta" />
+                                Karta</label><br />
+                            <label>
+                                <input type="radio" {...register('PynetMthod')} value="Naxt" />
+                                Naxt
+                            </label><br />
+                            <label>
+                                <input type="radio" {...register('PynetMthod')} value="Nasiya" />
+                                Nasiya
+                            </label>
+                            {errors.PynetMthod && (
+                                <p className="text-red-500">Phone number is required</p>
+                            )}
                         </div>
                         <div className="w-[200px]">
                             <button type="submit" className="text-indigo-500 bg-white font-bold rounded-md px-[10px] py-[2px]">submit</button>
@@ -102,6 +113,7 @@ const Cars = () => {
                                     <p className="font-bold text-[20px]">{item.carM}</p>
                                     <span className="text-[12px] font-bold text-gray-500">{item.name} {item.surname}</span>
                                     <span className="text-[12px] font-bold text-gray-500">tel: {item.telNumber}</span>
+                                    <p className="font-bold text-[20px]">{item.PynetMthod}</p>
                                     <div className="flex justify-end items-end w-[270px]">
                                         <button className="text-cente rounded-md px-[7px] py-[7px] text-gray-300" onClick={() => handleDelete(item.id)}><FaTrashAlt /></button>
                                     </div>
