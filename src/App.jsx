@@ -8,6 +8,7 @@ import Layout from './Pages/Layout'
 import SignUp from './Components/SignUp/SignUp'
 import SignIn from './Components/SignIn/SignIn'
 import Cars from './Pages/Cars'
+import InfoMovies from './Components/InfoMovies/InfoMovies'
 
 function App() {
   const savedTheme = localStorage.getItem("theme");
@@ -23,7 +24,11 @@ function App() {
           <Route path='plans' element={<Plans />} />
           <Route path='cars' element={<Cars />} />
           <Route path='settings' element={<Settings />} />
-          <Route path='movies' element={<Movies />} />
+          <Route path='movies' element={<Movies />} >
+            <Route path='infomovies' element={<InfoMovies />} />
+          </Route>
+          {/* /movies/infomovies */}
+
         </Route>
         <Route path='signup' element={<SignUp />} />
         <Route path='signin' element={<SignIn />} />

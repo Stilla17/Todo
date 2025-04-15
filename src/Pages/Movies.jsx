@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MoviesCard from './../Components/MoviesCard/MoviesCard.jsx';
+import { Link, Outlet } from 'react-router';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -35,13 +36,14 @@ const Movies = () => {
     <div className="min-h-screen  p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">Trending Movies</h1>
 
-      <div className="grid grid-cols-3 gap-6 mb-10">
+      <div className="grid grid-cols-4 gap-6 mb-10">
         {movies.map((movie) => (
-          <MoviesCard key={movie.id} show={movie} />
+          <Link key={movie.id} to='/movies/infomovies'>
+            <MoviesCard show={movie} />
+          </Link>
         ))}
       </div>
 
-      
       <div className="flex justify-center items-center gap-4 mt-8">
         <button
           onClick={handlePrevPage}
@@ -70,6 +72,7 @@ const Movies = () => {
         </button>
       </div>
 
+      <Outlet />
     </div>
   );
 };
