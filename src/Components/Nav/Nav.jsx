@@ -53,7 +53,7 @@ const Nav = () => {
 
           </ul>
 
-          <div className="mt-auto flex items-center justify-end gap-4 text-gray-700">
+          <div className="mt-auto flex items-center justify-end gap-4 ">
             <Link to='signin'>Log Out</Link>
             <FaSignOutAlt />
           </div>

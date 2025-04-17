@@ -6,7 +6,6 @@ import axios from 'axios';
 const Cars = () => {
     const apiCars = import.meta.env.VITE_BOKS_API
     const [data, setData] = useState([]);
-    const [UrlCarImg, setUrlCarImg] = useState('')
     const [imgCar, setimgCar] = useState('');
 
 
