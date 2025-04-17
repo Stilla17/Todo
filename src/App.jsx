@@ -24,9 +24,8 @@ function App() {
           <Route path='plans' element={<Plans />} />
           <Route path='cars' element={<Cars />} />
           <Route path='settings' element={<Settings />} />
-          <Route path='movies' element={<Movies />} >
-            <Route path='infomovies' element={<InfoMovies />} />
-          </Route>
+          <Route path='movies' element={<Movies />} />
+          <Route path='movies/infomovies/:id' element={<InfoMovies />} />
           {/* /movies/infomovies */}
 
         </Route>
