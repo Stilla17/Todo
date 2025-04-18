@@ -3,6 +3,7 @@ import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
 import { Link } from "react-router"
 import { FaFlagCheckered, FaBook, FaSignOutAlt } from "react-icons/fa";
+import { IoGameController } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
 
 const link = [
@@ -20,6 +21,11 @@ const link = [
     link: "Cars",
     path: "cars",
     icon: <FaFlagCheckered />
+  },
+  {
+    link: "game",
+    path: "game",
+    icon: <IoGameController />
   },
   {
     link: "Settings",
