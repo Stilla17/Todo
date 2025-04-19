@@ -49,14 +49,43 @@ const Plans = () => {
 
     const handleSearchChange = e => {
         setSearch(e.target.value);
-        setIsSearching(true);
-        setTimeout(() => setIsSearching(false), 500); // delay for UX effect
+
+        if (data.length > 0) {
+            setIsSearching(true);
+            setTimeout(() => setIsSearching(false), 500);
+        }
     };
 
     const filtered = data.filter(i => i.task.toLowerCase().includes(search.toLowerCase()));
 
     return (
-        <div className="max-w-[900px] mx-auto mt-10">
+        <div className="relative max-w-[900px] mx-auto mt-10">
+            {isSearching && data.length > 0 && (
+                <div className="mt-[200px] absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center bg-white/70 p-6 rounded-xl shadow-lg">
+                    <div className="flex items-center justify-center gap-2">
+                        <span className="loading loading-bars loading-xs"></span>
+                        <span className="loading loading-bars loading-sm"></span>
+                        <span className="loading loading-bars loading-md"></span>
+                        <span className="loading loading-bars loading-lg"></span>
+                        <span className="loading loading-bars loading-xl"></span>
+                    </div>
+                    <span className="mt-2 text-gray-600 text-lg font-semibold">Searching...</span>
+                </div>
+            )}
+
+            {search && !filtered.length && !isSearching && (
+                <div className="mt-[200px] absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                        <span className="loading loading-bars loading-sm text-red-600"></span>
+                        <span className="loading loading-bars loading-md text-red-600"></span>
+                        <span className="loading loading-bars loading-lg text-red-600"></span>
+                    </div>
+                    <p className="text-red-600 text-2xl font-bold uppercase tracking-widest animate-pulse">
+                        No Results Found
+                    </p>
+                </div>
+            )}
+
             <form onSubmit={handleSubmit} className="flex gap-2 flex-wrap items-center">
                 <input
                     placeholder="Name"
@@ -79,18 +108,8 @@ const Plans = () => {
                 />
             </form>
 
-            {isSearching && (
-                <div className="flex items-center gap-2 mt-2 ml-[140px]">
-                    <span className="loading loading-bars loading-xs"></span>
-                    <span className="loading loading-bars loading-sm"></span>
-                    <span className="loading loading-bars loading-md"></span>
-                    <span className="loading loading-bars loading-lg"></span>
-                    <span className="loading loading-bars loading-xl"></span>
-                    <span className="ml-2 text-gray-500">Searching...</span>
-                </div>
-            )}
-
-            {filtered.length ? filtered.map(i => (
+            {/* Task List */}
+            {filtered.map(i => (
                 <div key={i.id} className="flex items-center justify-between gap-2 p-2 mt-4 border rounded">
                     <div className="flex items-center gap-5">
                         <label className="w-[30px] h-[30px] cursor-pointer" onClick={() => toggleCheck(i.id)}>
@@ -106,10 +125,13 @@ const Plans = () => {
                     </div>
                     <div className="flex gap-2">
                         <Button onClick={() => handleDelete(i.id)} text="Delete" className="bg-red-400" />
-                        <Button onClick={() => { setForm({ task: i.task, urlimg: i.urlimg }); setEditId(i.id); }} text="Edit" className="bg-orange-400" />
+                        <Button onClick={() => {
+                            setForm({ task: i.task, urlimg: i.urlimg });
+                            setEditId(i.id);
+                        }} text="Edit" className="bg-orange-400" />
                     </div>
                 </div>
-            )) : <p className="mt-4 text-gray-500">No results</p>}
+            ))}
         </div>
     );
 };
