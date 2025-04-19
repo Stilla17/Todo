@@ -9,6 +9,7 @@ const Plans = () => {
     const [form, setForm] = useState({ task: '', urlimg: '' });
     const [editId, setEditId] = useState(null);
     const [search, setSearch] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
     const [checkboxes, setCheckboxes] = useState({});
 
     useEffect(() => {
@@ -46,16 +47,48 @@ const Plans = () => {
     const toggleCheck = id =>
         setCheckboxes(prev => ({ ...prev, [id]: !prev[id] }));
 
+    const handleSearchChange = e => {
+        setSearch(e.target.value);
+        setIsSearching(true);
+        setTimeout(() => setIsSearching(false), 500); // delay for UX effect
+    };
+
     const filtered = data.filter(i => i.task.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <div className="max-w-[900px] mx-auto mt-10">
             <form onSubmit={handleSubmit} className="flex gap-2 flex-wrap items-center">
-                <input placeholder="Name" value={form.task} onChange={e => setForm({ ...form, task: e.target.value })} className="border p-2 rounded" />
-                <input placeholder="Image URL" value={form.urlimg} onChange={e => setForm({ ...form, urlimg: e.target.value })} className="border p-2 rounded" />
+                <input
+                    placeholder="Name"
+                    value={form.task}
+                    onChange={e => setForm({ ...form, task: e.target.value })}
+                    className="border p-2 rounded"
+                />
+                <input
+                    placeholder="Image URL"
+                    value={form.urlimg}
+                    onChange={e => setForm({ ...form, urlimg: e.target.value })}
+                    className="border p-2 rounded"
+                />
                 <Button text={editId ? 'Update' : 'Add Student'} className="bg-green-400" />
-                <input placeholder="Search" value={search} onChange={e => setSearch(e.target.value)} className="border p-2 rounded ml-[140px]" />
+                <input
+                    placeholder="Search"
+                    value={search}
+                    onChange={handleSearchChange}
+                    className="border p-2 rounded ml-[140px]"
+                />
             </form>
+
+            {isSearching && (
+                <div className="flex items-center gap-2 mt-2 ml-[140px]">
+                    <span className="loading loading-bars loading-xs"></span>
+                    <span className="loading loading-bars loading-sm"></span>
+                    <span className="loading loading-bars loading-md"></span>
+                    <span className="loading loading-bars loading-lg"></span>
+                    <span className="loading loading-bars loading-xl"></span>
+                    <span className="ml-2 text-gray-500">Searching...</span>
+                </div>
+            )}
 
             {filtered.length ? filtered.map(i => (
                 <div key={i.id} className="flex items-center justify-between gap-2 p-2 mt-4 border rounded">

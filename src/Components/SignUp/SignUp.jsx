@@ -2,6 +2,8 @@ import React from 'react'
 import { LuUpload } from "react-icons/lu";
 import SignInput from '../LoginInput/LoginInput';
 import FillBro from './../../assets/Img/Fill out-bro 1.png';
+
+
 const SignUp = () => {
   return (
     <>
@@ -22,5 +24,4 @@ const SignUp = () => {
     </>
   )
 }
-
 export default SignUp
