@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
@@ -82,3 +83,16 @@ const Nav = () => {
 };
 
 export default Nav;
+=======
+import React from 'react'
+
+const Nav = () => {
+  return (
+    <div>
+        
+    </div>
+  )
+}
+
+export default Nav
+>>>>>>> 78880e97ed1a176ee3c7bf5fbe04c921be53d5bf
