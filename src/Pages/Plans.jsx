@@ -10,7 +10,6 @@ const Plans = () => {
     const [editId, setEditId] = useState(null);
     const [search, setSearch] = useState('');
     const [isSearching, setIsSearching] = useState(false);
-    const [checkboxes, setCheckboxes] = useState({});
 
     useEffect(() => {
         const local = localStorage.getItem('students');
@@ -43,9 +42,6 @@ const Plans = () => {
         axios.delete(`${apiStudent}/${id}`).then(() =>
             setData(prev => prev.filter(i => i.id !== id))
         );
-
-    const toggleCheck = id =>
-        setCheckboxes(prev => ({ ...prev, [id]: !prev[id] }));
 
     const handleSearchChange = e => {
         setSearch(e.target.value);
@@ -112,14 +108,6 @@ const Plans = () => {
             {filtered.map(i => (
                 <div key={i.id} className="flex items-center justify-between gap-2 p-2 mt-4 border rounded">
                     <div className="flex items-center gap-5">
-                        <label className="w-[30px] h-[30px] cursor-pointer" onClick={() => toggleCheck(i.id)}>
-                            <input type="checkbox" hidden checked={checkboxes[i.id] || false} readOnly />
-                            <div className={`w-full h-full flex items-center justify-center border-2 rounded ${checkboxes[i.id] ? 'bg-green-500 border-green-500' : 'bg-red-500 border-red-500'}`}>
-                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                                    <path d={checkboxes[i.id] ? "M5 13l4 4L19 7" : "M6 6L18 18M6 18L18 6"} />
-                                </svg>
-                            </div>
-                        </label>
                         <img src={i.urlimg} alt={i.task} className="w-[100px] h-[100px] rounded-full" />
                         <p>{i.task}</p>
                     </div>
@@ -137,3 +125,4 @@ const Plans = () => {
 };
 
 export default Plans;
+ 
