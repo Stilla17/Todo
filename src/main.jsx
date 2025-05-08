@@ -6,12 +6,12 @@ import App from './App.jsx'
 import { AuthProvider } from './Components/AuthContext/AuthProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <AuthProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
       <StrictMode>
         <App />
       </StrictMode>
-    </BrowserRouter>
-  </AuthProvider>
+    </AuthProvider>
+  </BrowserRouter>
   ,
 )

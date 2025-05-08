@@ -1,7 +1,7 @@
 import React from "react";
-import user_img from "./../../assets/img/user_img.png";
+// import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router"
 import { FaFlagCheckered, FaBook, FaSignOutAlt } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { useAuth } from "../AuthContext/AuthProvider";
@@ -27,16 +27,18 @@ const link = [
     path: "settings",
     icon: <IoMdSettings />
   },
-];
+
+]
 
 const Nav = () => {
-  const { user, logOut } = useAuth();
-  const navigate = useNavigate();
+
+  const { user, logOut } = useAuth()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
-    logOut();
-    navigate("/signin");
-  };
+    logOut()
+    navigate('/signin')
+  }
 
   return (
     <nav className="shadow-2xl w-[25%] rounded-2xl h-[100vh] fixed">

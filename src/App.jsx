@@ -34,22 +34,43 @@ function App() {
   if (!showApp) return <Loader />;
 
   return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route index element={<Dashboard />} />
-        <Route path='plans' element={<Plans />} />
-        <Route path='cars' element={<Cars />} />
-        <Route path='settings' element={
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>} />
-        <Route path='movies' element={<Movies />} />
-        <Route path='movies/infomovies/:id' element={<InfoMovies />} />
-      </Route>
-      <Route path='signup' element={<SignUp />} />
-      <Route path='signin' element={<SignIn />} />
-    </Routes>
-  );
+    <>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path='plans' element={
+            <ProtectedRoute>
+              <Plans />
+            </ProtectedRoute>
+          } />
+          <Route path='cars' element={
+            <ProtectedRoute>
+              <Cars />
+            </ProtectedRoute>
+          } />
+          <Route path='settings'
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>}
+          />
+          <Route path='movies' element={<Movies />} />
+          <Route path='movies/infomovies/:id' element={<InfoMovies />} />
+          {/* /movies/infomovies */}
+
+        </Route>
+
+
+        <Route path='signup' element={<SignUp />} />
+        <Route path='signin' element={<SignIn />} />
+      </Routes>
+
+    </>
+  )
 }
 
 export default App;

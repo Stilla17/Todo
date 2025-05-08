@@ -20,6 +20,7 @@ const SignIn = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
+        login(user)
         console.log("User:", user);
         login(user);  // Store user state in context or localStorage
         navigate('/');
