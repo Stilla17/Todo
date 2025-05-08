@@ -21,9 +21,21 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path='plans' element={<Plans />} />
-          <Route path='cars' element={<Cars />} />
+          <Route index element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path='plans' element={
+            <ProtectedRoute>
+              <Plans />
+            </ProtectedRoute>
+          } />
+          <Route path='cars' element={
+            <ProtectedRoute>
+              <Cars />
+            </ProtectedRoute>
+          } />
           <Route path='settings'
             element={
               <ProtectedRoute>

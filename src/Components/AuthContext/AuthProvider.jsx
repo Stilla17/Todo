@@ -1,19 +1,14 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { auth } from '../../firebase'
 
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
 
-    const [user, setUser] = useState(null)
-
-    useEffect(() => {
-
-        const savedUser = localStorage.getItem('user')
-        if (savedUser) {
-            setUser(JSON.parse(savedUser))
-        }
-
-    }, [])
+    const [user, setUser] = useState(() => {
+        const saveUser = localStorage.getItem('user')
+        return saveUser ? JSON.parse(saveUser) : null
+    })
 
     const login = (userData) => {
         setUser(userData)
@@ -32,4 +27,4 @@ export const AuthProvider = ({ children }) => {
     )
 }
 
-// export const useAuth = 
+export const useAuth = () => useContext(AuthContext)

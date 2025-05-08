@@ -4,33 +4,24 @@ import { FcGoogle } from "react-icons/fc";
 import WalkingBro from './../../assets/Img/Walking around-bro 1.png';
 import { Link, useNavigate } from 'react-router';
 
-import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBhZgWIwznZ3uRgK-NVsVEnRY42OI3OGss",
-  authDomain: "movies-73b1e.firebaseapp.com",
-  projectId: "movies-73b1e",
-  storageBucket: "movies-73b1e.firebasestorage.app",
-  messagingSenderId: "667594968944",
-  appId: "1:667594968944:web:abe35ff4daa20ba54149b5",
-  measurementId: "G-0RCWJBV70C"
-};
+import { useAuth } from '../AuthContext/AuthProvider';
+import { auth } from '../../firebase';
 
 const SignIn = () => {
-  const navigate = useNavigate()
 
-  const app = initializeApp(firebaseConfig);
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    const auth = getAuth();
 
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
+        login(user)
         console.log("User:", user);
 
         navigate('/')
@@ -40,8 +31,6 @@ const SignIn = () => {
         console.error("Error during sign in:", error);
       });
   };
-
-
 
   return (
     <>
