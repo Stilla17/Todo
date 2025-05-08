@@ -10,6 +10,7 @@ import SignIn from './Components/SignIn/SignIn'
 import Cars from './Pages/Cars'
 import InfoMovies from './Components/InfoMovies/InfoMovies'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
+import HCombat from './Components/Hamster/Combat'
 
 function App() {
   const savedTheme = localStorage.getItem("theme");
@@ -36,6 +37,12 @@ function App() {
               <Cars />
             </ProtectedRoute>
           } />
+                <Route path='hamster'
+               element={
+                 <ProtectedRoute>
+                   <HCombat />
+                 </ProtectedRoute>}
+             />
           <Route path='settings'
             element={
               <ProtectedRoute>

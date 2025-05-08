@@ -1,69 +1,92 @@
 import React from "react";
-// import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
-import { Link, useNavigate } from "react-router"
+import { Link, useNavigate } from "react-router";
 import { FaFlagCheckered, FaBook, FaSignOutAlt } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
+import { IoGameController } from "react-icons/io5";
 import { useAuth } from "../AuthContext/AuthProvider";
 
 const link = [
   {
     link: "Todo",
     path: "plans",
-    icon: <FaFlagCheckered />
+    icon: <FaFlagCheckered />,
   },
   {
     link: "Movies",
     path: "movies",
-    icon: <FaBook />
+    icon: <FaBook />,
   },
   {
     link: "Cars",
     path: "cars",
-    icon: <FaFlagCheckered />
+    icon: <FaFlagCheckered />,
   },
   {
     link: "Settings",
     path: "settings",
-    icon: <IoMdSettings />
+    icon: <IoMdSettings />,
   },
-
-]
+  {
+    link: "Mini game",
+    path: "hamster",
+    icon: <IoGameController />
+  }
+];
 
 const Nav = () => {
-
-  const { user, logOut } = useAuth()
-  const navigate = useNavigate()
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logOut()
-    navigate('/signin')
-  }
+    logOut();
+    navigate("/signin");
+  };
 
   return (
     <nav className="shadow-2xl w-[25%] rounded-2xl h-[100vh] fixed">
       <div className="w-[90%] mx-auto">
-        <div className="flex flex-col items-center justify-center gap-4 h-[300px]">
-          <img src={user.photoURL} alt="User avatar" className="w-24 h-24 rounded-full" />
-          <h2 className="text-2xl font-semibold">{user.displayName}</h2>
-          <Button className="text-sm bg-accent rounded-full px-4 py-2 text-white" text="Freelancer" />
+        <div className="flex flex-col items-center gap-4 h-[400px] bg-gray-100 mb-[20px] rounded-md w-[350px]">
+          {user ? (
+            <>
+           
+            <div className="w-[100%] h-[200px] bg-cover bg-center rounded-t-md flex items-center justify-center"  style={{ backgroundImage: `url(${user.photoURL})` }}>
+              <img
+                src={user.photoURL}
+                alt="User avatar"
+                className="w-24 h-24 rounded-full border-2 border-white mt-[60px]"
+              />
+            </div>
+              <h2 className="text-2xl font-semibold">{user.displayName}</h2>
+
+              <div className="bg-gray-300 w-[200px] h-[70px]">
+                <h2>ed</h2>
+              </div>
+              {/* <Button
+                className="text-sm bg-accent rounded-full px-4 py-2 text-white"
+                text="Freelancer"
+              /> */}
+            </>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="theme-preview bg-accent h-[330px] rounded-b-2xl rounded-tr-[100px] flex flex-col p-6 mb-6">
           <ul className="flex flex-col gap-4">
-            {
-              link.map((item, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  {item.icon}
-                  <Link to={item.path}>{item.link}</Link>
-                </li>
-              ))
-            }
-
+            {link.map((item, index) => (
+              <li key={index} className="flex items-center gap-2">
+                {item.icon}
+                <Link to={item.path}>{item.link}</Link>
+              </li>
+            ))}
           </ul>
 
           <div className="mt-auto flex items-center justify-end gap-4 ">
-            <button onClick={handleLogout} className="flex items-center gap-4 cursor-pointer">
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-4 cursor-pointer"
+            >
               Log Out
               <FaSignOutAlt />
             </button>
