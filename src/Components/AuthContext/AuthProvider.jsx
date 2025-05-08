@@ -1,14 +1,19 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../../firebase'
-
+import { onAuthStateChanged } from 'firebase/auth';
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
 
-    const [user, setUser] = useState(() => {
-        const saveUser = localStorage.getItem('user')
-        return saveUser ? JSON.parse(saveUser) : null
-    })
+    const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     const login = (userData) => {
         setUser(userData)
