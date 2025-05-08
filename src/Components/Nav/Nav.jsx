@@ -20,7 +20,7 @@ const link = [
   {
     link: "Cars",
     path: "cars",
-    icon: <FaFlagCheckered />
+    icon: <FaFlagCheckered /> 
   },
   {
     link: "Settings",
@@ -50,9 +50,9 @@ const Nav = () => {
             </>
           ) : (
             <>
-              <img src={user_img} alt="Default avatar" className="w-24 h-24 rounded-full" />
+              {/* <img src={user_img} alt="Default avatar" className="w-24 h-24 rounded-full" />
               <h2 className="text-2xl font-semibold">Guest</h2>
-              <Button className="text-sm bg-gray-400 rounded-full px-4 py-2 text-white" text="Not Signed In" />
+              <Button className="text-sm bg-gray-400 rounded-full px-4 py-2 text-white" text="Not Signed In" /> */}
             </>
           )}
         </div>
