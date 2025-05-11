@@ -13,6 +13,7 @@ const Movies = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
   const apiIMG = import.meta.env.VITE_IMG
 
+
   const fetchMovies = async (currentPage) => {
     setLoading(true)
     try {

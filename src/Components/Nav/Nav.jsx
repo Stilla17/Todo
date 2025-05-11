@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../Button/Button";
 import { Link, useNavigate } from "react-router"
 import { FaFlagCheckered, FaBook, FaSignOutAlt } from "react-icons/fa";
+import { IoGameController } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
 import { useAuth } from "../AuthContext/AuthProvider";
 
@@ -21,6 +22,11 @@ const link = [
     link: "Cars",
     path: "cars",
     icon: <FaFlagCheckered />
+  },
+  {
+    link: "game",
+    path: "game",
+    icon: <IoGameController />
   },
   {
     link: "Settings",

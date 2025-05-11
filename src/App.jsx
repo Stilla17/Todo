@@ -9,7 +9,7 @@ import SignUp from './Components/SignUp/SignUp'
 import SignIn from './Components/SignIn/SignIn'
 import Cars from './Pages/Cars'
 import InfoMovies from './Components/InfoMovies/InfoMovies'
-import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
+import Combat from './Components/Hamster/Combat'
 
 function App() {
   const savedTheme = localStorage.getItem("theme");
@@ -21,31 +21,14 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
-          <Route path='plans' element={
-            <ProtectedRoute>
-              <Plans />
-            </ProtectedRoute>
-          } />
-          <Route path='cars' element={
-            <ProtectedRoute>
-              <Cars />
-            </ProtectedRoute>
-          } />
-          <Route path='settings'
-            element={
-              <ProtectedRoute>
-                <Settings />
-              </ProtectedRoute>}
-          />
+          <Route index element={<Dashboard />} />
+          <Route path='plans' element={<Plans />} />
+          <Route path='cars' element={<Cars />} />
+          <Route path='game' element={<Combat />} />
+          <Route path='settings' element={<Settings />} />
           <Route path='movies' element={<Movies />} />
           <Route path='movies/infomovies/:id' element={<InfoMovies />} />
-          {/* /movies/infomovies */}
-
+        
         </Route>
 
 
@@ -53,6 +36,7 @@ function App() {
         <Route path='signin' element={<SignIn />} />
       </Routes>
 
+      
     </>
   )
 }
