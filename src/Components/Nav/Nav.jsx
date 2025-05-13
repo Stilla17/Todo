@@ -1,8 +1,7 @@
 import React from "react";
-// import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
-import { Link, useNavigate } from "react-router"
-import { FaFlagCheckered, FaBook, FaSignOutAlt } from "react-icons/fa";
+import { Link } from "react-router";
+import { FaFlagCheckered, FaBook } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { useAuth } from "../AuthContext/AuthProvider";
 
@@ -20,25 +19,17 @@ const link = [
   {
     link: "Cars",
     path: "cars",
-    icon: <FaFlagCheckered /> 
+    icon: <FaFlagCheckered />
   },
   {
     link: "Settings",
     path: "settings",
     icon: <IoMdSettings />
-  },
-
-]
+  }
+];
 
 const Nav = () => {
-
-  const { user, logOut } = useAuth()
-  const navigate = useNavigate()
-
-  const handleLogout = () => {
-    logOut()
-    navigate('/signin')
-  }
+  const { user } = useAuth();
 
   return (
     <nav className="shadow-2xl w-[25%] rounded-2xl h-[100vh] fixed">
@@ -51,11 +42,7 @@ const Nav = () => {
               <Button className="text-sm bg-accent rounded-full px-4 py-2 text-white" text="Freelancer" />
             </>
           ) : (
-            <>
-              {/* <img src={user_img} alt="Default avatar" className="w-24 h-24 rounded-full" />
-              <h2 className="text-2xl font-semibold">Guest</h2>
-              <Button className="text-sm bg-gray-400 rounded-full px-4 py-2 text-white" text="Not Signed In" /> */}
-            </>
+            <></>
           )}
         </div>
 
@@ -68,15 +55,6 @@ const Nav = () => {
               </li>
             ))}
           </ul>
-
-          <div className="mt-auto flex items-center justify-end gap-4">
-            <Button
-              onClick={handleLogout}
-              className="text-sm bg-accent rounded-full px-4 py-2 text-white"
-              text="Logout"
-            />
-            <FaSignOutAlt />
-          </div>
         </div>
       </div>
     </nav>

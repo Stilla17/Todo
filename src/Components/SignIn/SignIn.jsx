@@ -8,7 +8,7 @@ import { useAuth } from '../AuthContext/AuthProvider';
 import { signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
 
 const SignIn = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
   const { login } = useAuth();
 
   const handleGoogleSignIn = () => {
@@ -49,7 +49,7 @@ const SignIn = () => {
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default SignIn;
