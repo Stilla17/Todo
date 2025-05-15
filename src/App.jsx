@@ -27,7 +27,7 @@ function App() {
     if (!loading) {
       const timer = setTimeout(() => {
         setShowApp(true);
-      }, 2000); // 2 sekundlik delay
+      }, 2000); 
       return () => clearTimeout(timer);
     }
   }, [loading]);
