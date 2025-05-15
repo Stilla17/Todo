@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const UsersSide = () => {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+
+    })
+
     return (
         <>
-            <div className="w-[500px] h-[600px] bg-white rounded-xl shadow-xl p-6">
+            <div className="w-[500px] bg-white rounded-xl shadow-xl p-6">
                 <div className="flex justify-between border-b pb-4 mb-5">
                     <button className="text-blue-600 font-semibold">Primary</button>
                 </div>

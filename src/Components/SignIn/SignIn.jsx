@@ -3,23 +3,13 @@ import Input from '../Input/input'
 import { FcGoogle } from "react-icons/fc";
 import WalkingBro from './../../assets/Img/Walking around-bro 1.png';
 import { Link, useNavigate } from 'react-router';
-import { auth, db } from '../../firebase';
+import { auth } from '../../firebase';
 import { useAuth } from '../AuthContext/AuthProvider';
 import { signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { doc, setDoc } from 'firebase/firestore';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
-
-  const saveUserToFirestore = async (user) => {
-    await setDoc(doc(db, 'users', user.uid), {
-      email: user.email,
-      displayName: user.displayName || '',
-      photoURL: user.photoURL || '',
-      createdAt: new Date()
-    });
-  };
 
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -30,7 +20,6 @@ const SignIn = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        saveUserToFirestore(user);
         login(user)
         console.log("User:", user);
         login(user);  // Store user state in context or localStorage
