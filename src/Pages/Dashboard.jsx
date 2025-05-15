@@ -1,8 +1,38 @@
+// import { useEffect, useState } from 'react';
+// import { collection, getDocs } from 'firebase/firestore';
+// import { db } from '../firebase';
+
+// const Dashboard = () => {
+//     const [users, setUsers] = useState([]);
+
+//     useEffect(() => {
+//         const fetchUsers = async () => {
+//             const querySnapshot = await getDocs(collection(db, 'users'));
+//             const usersData = querySnapshot.docs.map(doc => doc.data());
+//             setUsers(usersData);
+//         };
+//         console.log(users);
+
+//         fetchUsers();
+//     }, []);
+
+//     return (
+//         <>
+//             {users.map((user, idx) => (
+//                 <div key={idx} style={{ marginBottom: '1rem' }}>
+//                     {user.photoURL && <img src={user.photoURL} width="80" alt="avatar" />}
+//                     <p>{user.displayName || user.email}</p>
+//                 </div>
+//             ))}
+//         </>
+//     )
+// }
 import React, { useState } from 'react';
 import focused from './../img/focused.jpg';
 import work from './../img/work.jpg';
 import day_one from './../img/day one-one day.jpg';
 import be_you from './../img/Be yoyu.jpg';
+import UsersSide from '../Components/UsersSide/UsersSide';
 
 const images = [focused, work, day_one, be_you];
 
@@ -59,6 +89,8 @@ const Dashboard = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
             </button>
+
+            <UsersSide />
         </div>
     );
 };

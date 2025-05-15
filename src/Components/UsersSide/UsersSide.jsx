@@ -1,13 +1,11 @@
 import React from 'react'
 
-function UsersSide() {
+const UsersSide = () => {
     return (
-        <div>
+        <>
             <div className="w-[500px] h-[600px] bg-white rounded-xl shadow-xl p-6">
                 <div className="flex justify-between border-b pb-4 mb-5">
                     <button className="text-blue-600 font-semibold">Primary</button>
-                    <button className="text-gray-500 font-semibold">General</button>
-                    <button className="text-gray-500 font-semibold">Requests</button>
                 </div>
                 <ul className="space-y-5">
                     {[
@@ -28,7 +26,7 @@ function UsersSide() {
                 </ul>
                 <div className="mt-6 text-blue-500 text-sm cursor-pointer hover:underline">View All</div>
             </div>
-        </div>
+        </>
     )
 }
 
