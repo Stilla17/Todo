@@ -5,8 +5,14 @@ import { FaFlagCheckered, FaBook } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { useAuth } from "../AuthContext/AuthProvider";
 import { IoGameController } from "react-icons/io5";
+import { IoHomeSharp } from "react-icons/io5";
 
 const link = [
+  {
+    link: "Home",
+    path: "",
+    icon: <IoHomeSharp />
+  },
   {
     link: "Todo",
     path: "plans",
