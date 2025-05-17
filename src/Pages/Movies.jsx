@@ -13,10 +13,12 @@ const Movies = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
   const apiIMG = import.meta.env.VITE_IMG
 
+
   const fetchMovies = async (currentPage) => {
     setLoading(true)
     try {
       const response = await axios.get(`${apiMovies}${apiKey}&page=${currentPage}`);
+      console.log(response);
       setMovies(response.data.results);
       setTotalPages(response.data.total_pages);
     } catch (error) {
@@ -48,7 +50,7 @@ const Movies = () => {
         <div className="grid grid-cols-4 gap-6 mb-10">
           {
             loading ? Array.from({ length: 8 }).map((_, index) => (
-              <div className="skeleton h-[300px] w-full"></div>
+              <div key={index} className="skeleton h-[300px] w-full"></div>
             )) :
               movies.map((movie, index) => (
                 <Link key={index} state={{ movie: movie }} to={`/movies/infomovies/:${movie.id}`}>

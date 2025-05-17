@@ -10,6 +10,8 @@ const PlansDay = () => {
 
     const apiPlan = import.meta.env.VITE_PLAN_API;
 
+    
+
     useEffect(() => {
         axios.get(apiPlan)
             .then(res => {

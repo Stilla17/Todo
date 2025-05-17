@@ -3,22 +3,22 @@ import React from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Buttons from '../Components/buttons/HamsterButtons.jsx';
 
-import Buttons from './../buttons/Buttons.jsx';
-import HmasterCoin from './../../assets/img/Group.png';
-import GroupBGicoin from './../../assets/img/GroupBGicoin.png';
-import Booost from './../../assets/img/Vector.png';
-import dude from './../../assets/img/dude.png';
-import Coins from './../../assets/img/Coins.png';
-import Mine from './../../assets/img/MIne.png';
-import hamster from './../../assets/img/hamster.png';
-import Binanse from './../../assets/img/Union.png';
-import DropCoin from './DropCoin.png';
-import Exclude from './../../assets/img/Exclude.png';
-import x10 from './../../assets/img/x10.png';
-import Meme from './../../assets/img/Meme.png';
+import HmasterCoin from './../assets/img/Group.png';
+import GroupBGicoin from './../assets/img/GroupBGicoin.png';
+import Booost from './../assets/img/Vector.png';
+import dude from './../assets/img/dude.png';
+import Coins from './../assets/img/Coins.png';
+import Mine from './../assets/img/MIne.png';
+import hamster from './../assets/img/hamster.png';
+import Binanse from './../assets/img/Union.png';
+import DropCoin from './../assets/Img/DropCoin.png';
+import Exclude from './../assets/img/Exclude.png';
+import x10 from './../assets/img/x10.png';
+import Meme from './../assets/img/Meme.png';
 
-const HCombat = () => {
+const Combat = () => {
     const [state, setSate] = useState({
        count: 20000, 
        Boost: 6500,  
@@ -31,12 +31,43 @@ const HCombat = () => {
        threeActive: false, 
        LevelOne: 120,
        OnePrise: 192,
+       LevelsOne: 1,
+       twoPfet: 375,
+       twoprise: 2300,
+       twoLevel: 1,
+       threePrfet: 997,
+       threeprese: 11200,
+       threelevel: 1,
+       detalisDrop: false,
+       PeffetHour: 120,
+       OSLavel: 20004,
       });
-  
-      // console.log(Boost);
+    const [dropDown, setdropDown] = useState(false)
 
+    useEffect(() => {
+      if (state.count >= state.OSLavel) {
+        LevelUp()
+        setSate(prev => ({
+          ...prev,
+          OSLavel: prev.OSLavel * 2
+        }))
+      }
+    }, [state.count, state.OSLavel])
+
+
+     
       const notifySuccess = () => {
         toast.success('Operatsiya bajarildi !', {
+          position: "top-center",
+          autoClose: 3000, 
+          hideProgressBar: true, 
+          closeOnClick: true,
+          pauseOnHover: true, 
+        });
+      };
+
+      const LevelUp = () => {
+        toast.success('Level Up !', {
           position: "top-center",
           autoClose: 3000, 
           hideProgressBar: true, 
@@ -149,7 +180,7 @@ const HCombat = () => {
       }, [])
 
 
-      const ProfitHour =  () => {
+      const ProfitHourOne =  () => {
        setSate(prev => {
         if (prev.count >= prev.OnePrise) {
           notifySuccess()
@@ -157,7 +188,9 @@ const HCombat = () => {
            ...prev,
            count: prev.count - prev.OnePrise, 
            LevelOne: prev.LevelOne * 2,
-           OnePrise: prev.OnePrise * 2 
+           OnePrise: prev.OnePrise * 2, 
+           LevelsOne: prev.LevelsOne + 1,
+           PeffetHour: prev.PeffetHour * 2
           }
         }else{
           notifyError()
@@ -165,6 +198,42 @@ const HCombat = () => {
         }
        })      
       }
+      const ProfitHourTwo =  () => {
+        setSate(prev => {
+         if (prev.count >= prev.twoprise) {
+           notifySuccess()
+           return{
+            ...prev,
+            count: prev.count - prev.twoprise, 
+            twoPfet: prev.twoPfet * 2,
+            twoprise: prev.twoprise * 2, 
+            twoLevel: prev.twoLevel + 1,
+            PeffetHour: prev.PeffetHour * 2
+           }
+         }else{
+           notifyError()
+           return prev;
+         }
+        })      
+       }
+       const ProfitHourthree =  () => {
+        setSate(prev => {
+         if (prev.count >= prev.threeprese) {
+           notifySuccess()
+           return{
+            ...prev,
+            count: prev.count - prev.threeprese, 
+            threePrfet: prev.threePrfet * 2,
+            threeprese: prev.threeprese * 2, 
+            threelevel: prev.threelevel + 1,
+            PeffetHour: prev.PeffetHour * 2
+           }
+         }else{
+           notifyError()
+           return prev;
+         }
+        })      
+       }
       
       useEffect(() => {
         const interval  = setInterval(() => {
@@ -184,7 +253,11 @@ const HCombat = () => {
       //   let utterance = new SpeechSynthesisUtterance("bombardino crokadilo chun chun chun chung sabiro");
       //   speechSynthesis.speak(utterance);
       // }
-
+      useEffect(() => {
+        if (state.Boost >= maxBoost) {
+          toast.info('Boost Full!', { position: "bottom-center" });
+        }
+      }, [state.Boost]);
   
       const maxBoost = 6500
       const boostPercent = (state.Boost / maxBoost) * 100
@@ -192,7 +265,8 @@ const HCombat = () => {
     return (
       <>
       <ToastContainer />
-        <div className="w-[428px] h-[926px] bg-[#2C2F35] rounded-[50px]">
+       <div className="w-[100%] flex justify-center border">
+       <div className="w-[428px] h-[926px] bg-[#2C2F35] rounded-[50px]">
           <div className="h-[60px] w-[100%]  flex justify-center items-end mb-[56px]">
             <h1 className="text-center text-white text-[16px] font-bold">Hamster Kombat</h1>
           </div>
@@ -240,13 +314,13 @@ const HCombat = () => {
             </details>
             <Buttons
               text={"Coins to level up"}
-              counter={"-"}
+              counter={state.OSLavel}
               ImgClass={"hidden"}
               Textclass={"text-[#6F72E2]"}
             />
             <Buttons
               text={"Profit per hour"}
-              counter={state.LevelOne}
+              counter={state.PeffetHour}
               Textclass={"text-[#84CB69]"}
             />
           </div>
@@ -262,6 +336,7 @@ const HCombat = () => {
               <img
               onClick={handleHamster}
                 src={HmasterCoin}
+                className="active:scale-90 transition duration-150"
                 alt=""
               />
           </div>
@@ -283,7 +358,8 @@ const HCombat = () => {
         
           <div className="flex gap-[10px] rounded-[8px] justify-center items-center w-[368px] h-[60px] mx-auto bg-[#32363CB2]">
         <details>
-          <summary className="list-none [&::-webkit-details-marker]:hidden">
+          <summary onClick={() => setdropDown(true)}
+           className="list-none [&::-webkit-details-marker]:hidden">
           <div className="w-[65px] h-[50px] flex flex-wrap items-center justify-center text-center rounded-[8px] text-white hover:bg-[#212429]">
               <div className="w-[50px] flex justify-center">
               <img src={Binanse} alt="" />
@@ -292,17 +368,17 @@ const HCombat = () => {
             </div>
           </summary>
 
-          <div className="bg-[#2C2F35] shadow-[4px_4px_10px_5px_#00000040] w-[375px] h-[502px] rounded-[20px] py-[35px] pl-[31px] pr-[25px] absolute mt-[-570px]">
-          <RxCross2 className="text-white font-bold text-[44px] "/>
+          <div className={`bg-[#2C2F35] shadow-[4px_4px_10px_5px_#00000040] w-[375px] h-[502px] rounded-[20px] py-[35px] pl-[31px] pr-[25px] absolute mt-[-570px] ${dropDown ? "block" : "hidden"}`}>
+          <RxCross2 onClick={() => setdropDown(false)} className="text-white font-bold text-[44px] "/>
 
           <div className="flex flex-wrap gap-[12px] mt-[25px]">
            
-          <div onClick={ProfitHour} className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
+          <div onClick={ProfitHourOne} className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
              <div className="flex items-center gap-4 border-[#FFFFFF33] border-b h-[54px]">
                 <img className="w-[56px] h-[32px]" src={Exclude} alt="" />
               <div>
 
-             <div className="w-[118px] h-[42px] ">
+             <div className="w-[118px] h-[42px]">
                 
                <div className="text-[9px] font-bold">Тоp 10 cmc pairs</div>
                <div className="text-[7px] text-gray-300">Profit per hour</div>
@@ -314,12 +390,12 @@ const HCombat = () => {
              </div>
 
             <div className="flex items-center gap-[12px] text-base h-[24px]">
-              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl 1</div>
+              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl {state.LevelsOne}</div>
               <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> {state.OnePrise}</div>
             </div>
           </div>
 
-          <div className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
+          <div onClick={ProfitHourTwo} className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
              <div className="flex items-center gap-4 border-[#FFFFFF33] border-b h-[54px]">
                 <img className="w-[48px] h-[48px]" src={Meme} alt="" />
               <div>
@@ -328,7 +404,7 @@ const HCombat = () => {
                 
                <div className="text-[9px] font-bold">Mene Coin</div>
                <div className="text-[7px] text-gray-300">Profit per hour</div>
-               <div className="text-yellow-400 text-[8px] flex gap-[2px]"><img className="w-[11px] h-[11px]" src={DropCoin} alt="" /> 375</div>
+               <div className="text-yellow-400 text-[8px] flex gap-[2px]"><img className="w-[11px] h-[11px]" src={DropCoin} alt="" /> {state.twoPfet}</div>
 
              </div>
 
@@ -336,12 +412,12 @@ const HCombat = () => {
              </div>
 
             <div className="flex items-center gap-[12px] text-base h-[24px]">
-              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl 1</div>
-              <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> 2.3K</div>
+              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl {state.twoLevel}</div>
+              <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> {state.twoprise}</div>
             </div>
           </div>
 
-          <div className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
+          <div onClick={ProfitHourthree} className="bg-zinc-800 text-white rounded-2xl p-4 w-full max-w-md flex flex-col h-[109px] gap-4 shadow-lg">
              <div className="flex items-center gap-4 border-[#FFFFFF33] border-b h-[54px]">
                 <img className="w-[32px] h-[15px]" src={x10} alt="" />
               <div>
@@ -350,7 +426,7 @@ const HCombat = () => {
                 
                <div className="text-[9px] font-bold">Margin trading x10</div>
                <div className="text-[7px] text-gray-300">Profit per hour</div>
-               <div className="text-yellow-400 text-[8px] flex gap-[2px]"><img className="w-[11px] h-[11px]" src={DropCoin} alt="" /> 997</div>
+               <div className="text-yellow-400 text-[8px] flex gap-[2px]"><img className="w-[11px] h-[11px]" src={DropCoin} alt="" /> {state.threePrfet}</div>
 
              </div>
 
@@ -358,8 +434,8 @@ const HCombat = () => {
              </div>
 
             <div className="flex items-center gap-[12px] text-base h-[24px]">
-              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl 1</div>
-              <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> 11.2K</div>
+              <div className="text-sm px-3 py-1 border-r-1 border-[#FFFFFF33] ">lvl {state.threelevel}</div>
+              <div className="font-semibold text-[12px] flex"><img className="h-[15px] w-[15px]" src={DropCoin} alt="" /> {state.threeprese}</div>
             </div>
           </div>
 
@@ -395,8 +471,9 @@ const HCombat = () => {
   
         </div>
         {/* <img onClick={bomm} className="rounded-[50px]" src="https://i1.sndcdn.com/artworks-4fPGk176hMQgdghK-zFMj5Q-t500x500.jpg" alt="" /> */}
+       </div>
       </>
     );
 }
 
-export default HCombat
+export default Combat

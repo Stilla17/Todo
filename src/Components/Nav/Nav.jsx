@@ -2,8 +2,8 @@ import React from "react";
 import Button from "../Button/Button";
 import { Link, useNavigate } from "react-router";
 import { FaFlagCheckered, FaBook, FaSignOutAlt } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
 import { IoGameController } from "react-icons/io5";
+import { IoMdSettings } from "react-icons/io";
 import { useAuth } from "../AuthContext/AuthProvider";
 
 const link = [
@@ -23,16 +23,22 @@ const link = [
     icon: <FaFlagCheckered />,
   },
   {
+    link: "game",
+    path: "game",
+    icon: <IoGameController />
+  },
+  {
     link: "Settings",
     path: "settings",
     icon: <IoMdSettings />,
   },
-  {
-    link: "Mini game",
-    path: "hamster",
-    icon: <IoGameController />
-  }
 ];
+
+
+
+
+
+
 
 const Nav = () => {
   const { user, logOut } = useAuth();
@@ -45,7 +51,7 @@ const Nav = () => {
 
   return (
     <nav className="shadow-2xl w-[25%] rounded-2xl h-[100vh] fixed">
-      <div className="w-[90%] mx-auto">
+ <div className="w-[90%] mx-auto">
         <div className="flex flex-col items-center gap-4 h-[400px] bg-gray-100 mb-[20px] rounded-md w-[350px]">
           {user ? (
             <>
@@ -59,13 +65,17 @@ const Nav = () => {
             </div>
               <h2 className="text-2xl font-semibold">{user.displayName}</h2>
 
-              <div className="bg-gray-300 w-[200px] h-[70px]">
-                <h2>ed</h2>
+              <div className="bg-gray-300 w-[250px] h-[70px] rounded-[10px] flex justify-around items-center">
+                <div className="w-[50px] text-center"><h2 className="font-bold">100+</h2> <p className="text-gray-500">Post</p></div> 
+                <div className="border-r-1 h-[45px]"></div>
+                <div className="w-[50px] text-center"><h2 className="font-bold">200+</h2> <p className="text-gray-500">Follow</p></div> 
+                <div className="border-r-1 h-[45px]"></div>
+                <div className="w-[50px] text-center"><h2 className="font-bold">infinity+</h2> <p className="text-gray-500">Folloers</p></div>
               </div>
-              {/* <Button
+              <Button
                 className="text-sm bg-accent rounded-full px-4 py-2 text-white"
                 text="Freelancer"
-              /> */}
+              />
             </>
           ) : (
             ""
@@ -74,12 +84,14 @@ const Nav = () => {
 
         <div className="theme-preview bg-accent h-[330px] rounded-b-2xl rounded-tr-[100px] flex flex-col p-6 mb-6">
           <ul className="flex flex-col gap-4">
-            {link.map((item, index) => (
-              <li key={index} className="flex items-center gap-2">
-                {item.icon}
-                <Link to={item.path}>{item.link}</Link>
-              </li>
-            ))}
+            {
+              link.map((item, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  {item.icon}
+                  <Link to={item.path}>{item.link}</Link>
+                </li>
+              ))
+            }
           </ul>
 
           <div className="mt-auto flex items-center justify-end gap-4 ">
