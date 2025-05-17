@@ -1,5 +1,5 @@
 import React from "react";
-import user_img from "./../../assets/img/user_img.png";
+// import user_img from "./../../assets/img/user_img.png";
 import Button from "../Button/Button";
 import { Link, useNavigate } from "react-router"
 import { FaFlagCheckered, FaBook, FaSignOutAlt } from "react-icons/fa";
@@ -30,7 +30,6 @@ const link = [
 
 ]
 
-
 const Nav = () => {
 
     const { user, logOut } = useAuth()
@@ -44,9 +43,13 @@ const Nav = () => {
     <nav className="shadow-2xl w-[25%] rounded-2xl h-[100vh] fixed">
       <div className="w-[90%] mx-auto">
         <div className="flex flex-col items-center justify-center gap-4 h-[300px]">
-          <img src={user.photoURL} alt="User avatar" className="w-24 h-24 rounded-full" />
+          {
+            user ? (<>
+            <img src={user.photoURL} alt="User avatar" className="w-24 h-24 rounded-full" />
           <h2 className="text-2xl font-semibold">{user.displayName}</h2>
           <Button className="text-sm bg-accent rounded-full px-4 py-2 text-white" text="Freelancer" />
+            </>): ""
+          }
         </div>
 
         <div className="theme-preview bg-accent h-[330px] rounded-b-2xl rounded-tr-[100px] flex flex-col p-6 mb-6">
