@@ -48,47 +48,46 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex justify-center items-start min-h-screen bg-gray-100 p-12 space-x-10">
-            {/* LEFT ARROW */}
-            <button
-                onClick={prevSlide}
-                className="mt-[270px] mr-[-30px] z-10 bg-white p-4 rounded-full shadow-lg hover:scale-110 transition"
-            >
-                <svg
-                    className="w-7 h-7 text-gray-700"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    viewBox="0 0 24 24"
+        <div className="flex justify-center items-start min-h-screen bg-gray-100 p-10 space-x-10">
+            {/* SLIDER + ARROWS */}
+            <div className="relative w-[900px] h-[400px] flex items-center justify-center mt-16">
+                {/* LEFT ARROW */}
+                <button
+                    onClick={prevSlide}
+                    className="absolute left-3 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
                 >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
+                    <svg
+                        className="w-6 h-6 text-gray-700"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
 
-            {/* SLIDER */}
-            <div className="w-[1500px] h-[600px] rounded-xl overflow-hidden shadow-2xl relative">
                 <img
                     src={images[currentIndex]}
                     alt="slider"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-xl shadow-2xl"
                 />
-            </div>
 
-            {/* RIGHT ARROW */}
-            <button
-                onClick={nextSlide}
-                className="mt-[270px] ml-[-30px] z-10 bg-white p-4 rounded-full shadow-lg hover:scale-110 transition"
-            >
-                <svg
-                    className="w-7 h-7 text-gray-700"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    viewBox="0 0 24 24"
+                <button
+                    onClick={nextSlide}
+                    className="absolute right-3 z-10 bg-white p-2 rounded-full shadow hover:scale-105 transition"
                 >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
+                    <svg
+                        className="w-6 h-6 text-gray-700"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
 
             <UsersSide />
         </div>

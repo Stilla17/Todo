@@ -3,7 +3,7 @@ import React from 'react'
 const UsersSide = () => {
     return (
         <>
-            <div className="w-[500px] h-[600px] bg-white rounded-xl shadow-xl p-6">
+            <div className="w-[400px] h-[600px] bg-white rounded-xl shadow-xl p-6">
                 <div className="flex justify-between border-b pb-4 mb-5">
                     <button className="text-blue-600 font-semibold">Primary</button>
                 </div>
