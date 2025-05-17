@@ -4,8 +4,13 @@ const UsersSide = () => {
 
     const [users, setUsers] = useState([]);
 
-    useEffect(() => {
+    const apiServer = import.meta.env.VITE_SERVER
 
+    useEffect(() => {
+        fetch(apiServer)
+            .then(res => res.json())
+            .then((data) => setUsers(data))
+            .catch((err) => console.error("Xatolik:", err));
     })
 
     return (
@@ -15,19 +20,10 @@ const UsersSide = () => {
                     <button className="text-blue-600 font-semibold">Primary</button>
                 </div>
                 <ul className="space-y-5">
-                    {[
-                        'Roger Korsgaard',
-                        'Terry Torff',
-                        'Angel Bergson',
-                        'Emerson Gouse',
-                        'Corey Baptista',
-                        'Zain Culhane',
-                        'Randy Lipshutz',
-                        'Craig Botosh',
-                    ].map((name, idx) => (
+                    {users.map((user, idx) => (
                         <li key={idx} className="flex items-center space-x-4">
-                            <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
-                            <p className="text-[16px] font-medium">{name}</p>
+                            <img className='w-[50px] h-[50px] rounded-full' src={user.photoURL} alt="" />
+                            <p className="text-[16px] font-medium">{user.name}</p>
                         </li>
                     ))}
                 </ul>
