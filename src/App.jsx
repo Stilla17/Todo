@@ -13,6 +13,7 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import { useAuth } from './Components/AuthContext/AuthProvider';
 import Loader from './Components/Loader/Loader';
 import Combat from './Pages/Combat';
+import Chat from './Pages/Chat';
 
 function App() {
   const savedTheme = localStorage.getItem("theme");
@@ -49,6 +50,7 @@ function App() {
         </Route>
 
 
+        <Route path='Chat' element={<Chat />} />
         <Route path='signup' element={<SignUp />} />
         <Route path='signin' element={<SignIn />} />
       </Routes>
