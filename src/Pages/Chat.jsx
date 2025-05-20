@@ -13,7 +13,10 @@ const Chat = () => {
 
         <div className="w-[500px] h-[100vh] rounded-[16px] bg-white/10 backdrop-blur-md border-b border-white/10 shadow-sm pl-[30px] py-[20px]">
 
-            <h1 className="text-white font-semibold text-[50px] mb-[30px] font-[Inter]">💎 Quit Chat</h1>
+            <h1 className="text-white font-semibold text-[50px] mb-[10px] font-[Inter]">💎 Quit Chat</h1>
+            <Link to="/plans">
+                <h2 className='font-[Inter] font-bold text-[20px] flex gap-[10px] mb-[20px] items-center text-white'>back <FiLogOut /></h2>
+            </Link>
             <input type="text" className='text-white border-0 bg-violet-900/40 w-[300px] h-[50px] rounded-[20px] pl-[40px] mb-[50px] focus:outline-0' placeholder='Search here...'/>
 
                 <div className='flex flex-wrap gap-[20px]'>
@@ -33,9 +36,6 @@ const Chat = () => {
                         </div>
                     </div>
 
-            <Link to="/plans">
-                <h2 className='font-[Inter] font-bold text-[20px] flex gap-[10px] mt-[50px] items-center text-white'>LogOut <FiLogOut /></h2>
-            </Link>
                 </div>
             
         </div>
