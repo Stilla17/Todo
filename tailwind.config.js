@@ -1,10 +1,15 @@
+// module.exports = {
+
+//     daisyui: {
+//       themes: true,
+//     },
+// };  
 module.exports = {
-    plugins: [require("daisyui")],
-    daisyui: {
-      themes: true,
-    },
-};  
-module.exports = {
+  plugins: [require("daisyui")],
+
+  daisyui: {
+    themes: true,
+  },
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -19,5 +24,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 };
