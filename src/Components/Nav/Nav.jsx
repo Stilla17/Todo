@@ -50,7 +50,7 @@ const Nav = () => {
   const [showGames, setShowGames] = useState(false);
 
   return (
-    <nav className="shadow-2xl w-[25%] rounded-2xl h-[100vh] fixed">
+    <nav className="shadow-2xl w-[25%] rounded-2xl h-[100vh] fixed overflow-auto no-scrollbar">
       <div className="w-[90%] mx-auto">
         <div className="flex flex-col items-center gap-4 h-[400px] bg-gray-100 mb-[20px] rounded-md w-[350px] mt-[10px]">
           {user && (
@@ -108,9 +108,8 @@ const Nav = () => {
                   <span>Games list</span>
                 </div>
                 <FaChevronDown
-                  className={`transition-transform duration-300 ${
-                    showGames ? "rotate-180" : ""
-                  }`}
+                  className={`transition-transform duration-300 ${showGames ? "rotate-180" : ""
+                    }`}
                 />
               </div>
               {showGames && (
