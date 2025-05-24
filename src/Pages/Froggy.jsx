@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { IoClose } from "react-icons/io5";
-import './App.css'
 
-function App() {
+function Froggy() {
   const [random, setRandom] = useState({ left: 900, top: 300 }) 
   const [count , setCout] = useState(0)
   const [timeLeft, setTimeLeft] = useState(15)
@@ -79,4 +78,4 @@ function App() {
   )
 }
 
-export default App
+export default Froggy
