@@ -19,6 +19,7 @@
     "firebase": "^11.6.0",
     "i18next": "^25.1.2",
     "react": "^19.0.0",
+    "react-custom-roulette": "^1.4.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
     "react-i18next": "^15.5.1",
