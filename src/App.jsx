@@ -14,6 +14,7 @@ import { useAuth } from './Components/AuthContext/AuthProvider';
 import Loader from './Components/Loader/Loader';
 import Combat from './Pages/Combat';
 import Chat from './Pages/Chat';
+import Casino from './Pages/Casino';
 
 function App() {
   const savedTheme = localStorage.getItem("theme");
@@ -28,7 +29,7 @@ function App() {
     if (!loading) {
       const timer = setTimeout(() => {
         setShowApp(true);
-      }, 2000); 
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [loading]);
@@ -43,6 +44,7 @@ function App() {
           <Route path='plans' element={<Plans />} />
           <Route path='cars' element={<Cars />} />
           <Route path='games/combat' element={<Combat />} />
+          <Route path='games/casino' element={<Casino />} />
           <Route path='settings' element={<Settings />} />
           <Route path='movies' element={<Movies />} />
           <Route path='movies/infomovies/:id' element={<InfoMovies />} />

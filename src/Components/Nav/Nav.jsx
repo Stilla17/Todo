@@ -42,7 +42,8 @@ const link = [
 
 // Список игр
 const gamesList = [
-  { name: "Combat", path: "games/combat" }
+  { name: "Combat", path: "games/combat" },
+  { name: "Casino", path: "games/casino" }
 ];
 
 const Nav = () => {
