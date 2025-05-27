@@ -11,6 +11,8 @@ const SignIn = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
+
+
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
 
@@ -20,15 +22,18 @@ const SignIn = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        login(user)
         console.log("User:", user);
-        login(user);  // Store user state in context or localStorage
-        navigate('/');
+
+        login(user)
+        navigate('/')
+
       })
       .catch((error) => {
         console.error("Error during sign in:", error);
       });
   };
+
+
 
   return (
     <div className='w-[100%] h-[100vh] flex justify-center items-center'>
