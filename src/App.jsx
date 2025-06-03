@@ -15,6 +15,7 @@ import Loader from './Components/Loader/Loader';
 import Combat from './Pages/Combat';
 import Chat from './Pages/Chat';
 import Casino from './Pages/Casino';
+import Calculator from './Pages/Calculator';
 
 function App() {
   const savedTheme = localStorage.getItem("theme");
@@ -45,6 +46,7 @@ function App() {
           <Route path='cars' element={<Cars />} />
           <Route path='games/combat' element={<Combat />} />
           <Route path='games/casino' element={<Casino />} />
+          <Route path='games/calc' element={<Calculator />} />
           <Route path='settings' element={<Settings />} />
           <Route path='movies' element={<Movies />} />
           <Route path='movies/infomovies/:id' element={<InfoMovies />} />

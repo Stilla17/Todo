@@ -5,14 +5,18 @@ import './index.css'
 import App from './App.jsx'
 
 import { AuthProvider } from './Components/AuthContext/AuthProvider.jsx'
+import { Provider } from 'react-redux'
+import store from './app/store.js'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <AuthProvider>
-      <StrictMode>
-        <App />
-      </StrictMode>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <StrictMode>
+          <App />
+        </StrictMode>
+      </AuthProvider>
+    </Provider>
   </BrowserRouter>
   ,
 )
