@@ -40,10 +40,10 @@ const link = [
   }
 ];
 
-// Список игр
 const gamesList = [
   { name: "Combat", path: "games/combat" },
-  { name: "Casino", path: "games/casino" }
+  { name: "Casino", path: "games/casino" },
+  {name:"Calculator", path: "games/Calculator"}
 ];
 
 const Nav = () => {
