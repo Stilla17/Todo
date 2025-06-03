@@ -1,42 +1,60 @@
-import React from "react";
-import { useDispatch,useSelector } from "react-redux";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { textButton } from '../redux/calcFunctions/sliceCalc';
 
-const Calculator =()=>{
-    const result = useSelector(state => state.Calculator.value)
-    const dispatch = useDispatch
+const Calculator = () => {
+
+    const result = useSelector(state => state.calculator.value)
+
+    const dispatch = useDispatch()
+
+    const buttons = [
+        ['AC', '+/-', '%', '÷'],
+        ['7', '8', '9', '×'],
+        ['4', '5', '6', '-'],
+        ['1', '2', '3', '+'],
+        ['0', ',', '='],
+    ];
+
+    return (
+        <div className="w-64 bg-black rounded-xl overflow-hidden shadow-lg p-2">
+            <div className="text-right text-white text-5xl px-4 py-6 bg-gray-800">{result}</div>
+
+            <div className="grid grid-cols-4 gap-2 p-2">
+                {/* First row */}
+                {buttons.slice(0, 1).map((row, i) =>
+                    row.map((btn) => (
+                        <button button onClick={() => dispatch(textButton(btn))}
+                            key={btn}
+                            className="bg-gray-400 text-black text-xl rounded-full py-4"
+                        >
+                            {btn}
+                        </button>
+                    ))
+                )}
+
+                {/* Next rows */}
+                {buttons.slice(1, 4).map((row, i) =>
+                    row.map((btn) => (
+                        <button onClick={() => dispatch(textButton(btn))}
+                            key={btn}
+                            className={`${['÷', '×', '-', '+'].includes(btn)
+                                ? 'bg-orange-500 text-white'
+                                : 'bg-gray-700 text-white'
+                                } text-xl rounded-full py-4`}
+                        >
+                            {btn}
+                        </button>
+                    ))
+                )}
+
+                {/* Last row (0, , =) */}
+                <button className="col-span-2 bg-gray-700 text-white text-xl rounded-full py-4">0</button>
+                <button className="bg-gray-700 text-white text-xl rounded-full py-4">,</button>
+                <button className="bg-orange-500 text-white text-xl rounded-full py-4">=</button>
+            </div>
+        </div >
+    )
 }
-const buttons = [
-  ["AC", "+/-", "%", "÷"],
-  ["7", "8", "9", "×"],
-  ["4", "5", "6", "−"],
-  ["1", "2", "3", "+"],
-  ["0", ",", "="],
-];
 
-export default function Calculator() {
-  return (
-    <div className="w-[240px] mx-auto mt-10 bg-gray-800 rounded-xl overflow-hidden">
-      <div className="text-white text-right text-4xl p-4 bg-gray-900">0</div>
-      <div className="grid grid-cols-4 gap-[1px] bg-gray-700">
-        {/* First 4 rows */}
-        {buttons.slice(0, 4).flat().map((btn, i) => (
-          <button
-            key={i}
-            className={`text-white text-xl h-16 ${
-              ["÷", "×", "−", "+"].includes(btn)
-                ? "bg-orange-500"
-                : "bg-gray-600"
-            }`}
-          >
-            {btn}
-          </button>
-        ))}
-
-        {/* Last row with wide 0 button */}
-        <button className="col-span-2 bg-gray-600 text-white text-xl h-16">0</button>
-        <button className="bg-gray-600 text-white text-xl h-16">,</button>
-        <button className="bg-orange-500 text-white text-xl h-16">=</button>
-      </div>
-    </div>
-  );
-}
+export default Calculator

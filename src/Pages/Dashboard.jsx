@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from './../Components/AuthContext/AuthProvider.jsx';
 import UserSide from './../Components/UsersSide/UsersSide.jsx';
-import Slide from './../Components/Slider/Slider.jsx';
+import Slide from './../Components/Slide/Slide.jsx';
 
 const Dashboard = () => {
     const { user } = useAuth();
