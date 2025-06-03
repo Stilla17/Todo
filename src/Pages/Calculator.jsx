@@ -9,8 +9,8 @@ const Calculator = () => {
     const dispatch = useDispatch()
 
     const buttons = [
-        ['AC', '+/-', '%', '÷'],
-        ['7', '8', '9', '×'],
+        ['AC', '+/-', '%', '/'],
+        ['7', '8', '9', '*'],
         ['4', '5', '6', '-'],
         ['1', '2', '3', '+'],
         ['0', ',', '='],
@@ -24,7 +24,7 @@ const Calculator = () => {
                 {/* First row */}
                 {buttons.slice(0, 1).map((row, i) =>
                     row.map((btn) => (
-                        <button button onClick={() => dispatch(textButton(btn))}
+                        <button onClick={() => dispatch(textButton(btn))}
                             key={btn}
                             className="bg-gray-400 text-black text-xl rounded-full py-4"
                         >
@@ -49,9 +49,9 @@ const Calculator = () => {
                 )}
 
                 {/* Last row (0, , =) */}
-                <button className="col-span-2 bg-gray-700 text-white text-xl rounded-full py-4">0</button>
-                <button className="bg-gray-700 text-white text-xl rounded-full py-4">,</button>
-                <button className="bg-orange-500 text-white text-xl rounded-full py-4">=</button>
+                <button onClick={() => dispatch(textButton("0"))} className="col-span-2 bg-gray-700 text-white text-xl rounded-full py-4">0</button>
+                <button onClick={() => dispatch(textButton(","))} className="bg-gray-700 text-white text-xl rounded-full py-4">,</button>
+                <button onClick={() => dispatch(textButton("="))} className="bg-orange-500 text-white text-xl rounded-full py-4">=</button>
             </div>
         </div >
     )
