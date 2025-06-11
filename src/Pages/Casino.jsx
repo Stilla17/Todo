@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Rulette from '../Components/Wheel/Rulette';
+// import Rulette from '../Components/Wheel/Rulette';
 
 const Casino = () => {
     const numbers = [
@@ -47,7 +47,7 @@ const Casino = () => {
         <>
             <h1>{result}</h1>
             <div className='flex p-4 bg-green-700 h-[100%] items-center gap-4 text-white rounded-xl'>
-                <Rulette onOddsNumbers={handleOddNumbers} onResult={handleResult} />
+                {/* <Rulette onOddsNumbers={handleOddNumbers} onResult={handleResult} /> */}
                 <div className="">
                     <div className="grid grid-cols-[60px_repeat(12,40px)] gap-[2px]">
                         {numbers.map((row, rowIndex) => (
