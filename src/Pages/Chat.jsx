@@ -1,11 +1,76 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoInfo } from "react-icons/go";
 import { FiLogOut } from "react-icons/fi";
 import { IoIosSend } from "react-icons/io";
 import { ImFilePicture } from "react-icons/im";
 import background from './../assets/Img/183.png';
 import { Link } from 'react-router';
+import { io } from "socket.io-client";
+import { useAuth } from './../Components/AuthContext/AuthProvider.jsx';
+
+const socket = io("http://localhost:5000");
+
 const Chat = () => {
+
+    const [message, setMessage] = useState("")
+    const [chat, setChat] = useState([])
+    const { user } = useAuth();
+
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    const [users, setUsers] = useState([]);
+
+    const apiServer = import.meta.env.VITE_SERVER
+
+    useEffect(() => {
+
+        if (selectedUser && user) {
+            const roomId =
+                user.uid < selectedUser.uid
+                    ? `${user.uid}_${selectedUser.uid}`
+                    : `${selectedUser.uid}_${user.uid}`;
+
+            socket.emit("join_room", roomId);
+            console.log("Roomga qo‘shildik:", roomId);
+        }
+    }, [selectedUser, user]);
+
+    useEffect(() => {
+        socket.on("receive_message", (data) => {
+            setChat(prev => [...prev, data])
+        })
+
+        return () => socket.off("receive_message")
+    }, [])
+
+    useEffect(() => {
+        fetch(apiServer)
+            .then(res => res.json())
+            .then((data) => setUsers(data))
+            .catch((err) => console.error("Xatolik:", err));
+    })
+
+    const sendMessage = (event) => {
+        event.preventDefault()
+        if (message.trim() && selectedUser) {
+            const roomId =
+                user.id < selectedUser.uid
+                    ? `${user.uid}_${selectedUser.uid}`
+                    : `${selectedUser.uid}_${user.uid}`;
+
+            const data = {
+                room: roomId,
+                from: user.uid,
+                to: selectedUser.uid,
+                text: message,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            };
+            socket.emit("send_message", data);
+            setChat((prev) => [...prev, data]);
+            setMessage("");
+        }
+    }
+
     return (
         <>
             <div className="bg-cover bg-center" style={{ backgroundImage: `url(${background})` }}>
@@ -21,48 +86,14 @@ const Chat = () => {
 
                         <div className='flex flex-wrap gap-[20px] '>
 
-                            <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center pl-[10px] h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
-                                <div className='w-[80px] h-[80px] rounded-[50%] bg-gray-500'></div>
-                                <div>
-                                    <h2 className='font-bold text-[20px]'>Сабинина Мама</h2>
-                                    <p className='text-green-400 flex gap-[10px] items-center'>Online <div className='w-[10px] h-[10px] bg-green-400 rounded-full'></div></p>
-                                </div>
-                            </div>
-                            <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center pl-[10px] h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
-                                <div className='w-[80px] h-[80px] rounded-[50%] bg-gray-500'></div>
-                                <div>
-                                    <h2 className='font-bold text-[20px]'>Сабинина Мама</h2>
-                                    <p className='text-green-400 flex gap-[10px] items-center'>Online <div className='w-[10px] h-[10px] bg-green-400 rounded-full'></div></p>
-                                </div>
-                            </div>
-                            <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center pl-[10px] h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
-                                <div className='w-[80px] h-[80px] rounded-[50%] bg-gray-500'></div>
-                                <div>
-                                    <h2 className='font-bold text-[20px]'>Сабинина Мама</h2>
-                                    <p className='text-green-400 flex gap-[10px] items-center'>Online <div className='w-[10px] h-[10px] bg-green-400 rounded-full'></div></p>
-                                </div>
-                            </div>
-                            <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center pl-[10px] h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
-                                <div className='w-[80px] h-[80px] rounded-[50%] bg-gray-500'></div>
-                                <div>
-                                    <h2 className='font-bold text-[20px]'>Сабинина Мама</h2>
-                                    <p className='text-green-400 flex gap-[10px] items-center'>Online <div className='w-[10px] h-[10px] bg-green-400 rounded-full'></div></p>
-                                </div>
-                            </div>
-                            <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center pl-[10px] h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
-                                <div className='w-[80px] h-[80px] rounded-[50%] bg-gray-500'></div>
-                                <div>
-                                    <h2 className='font-bold text-[20px]'>Сабинина Мама</h2>
-                                    <p className='text-green-400 flex gap-[10px] items-center'>Online <div className='w-[10px] h-[10px] bg-green-400 rounded-full'></div></p>
-                                </div>
-                            </div>
-                            <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center pl-[10px] h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
-                                <div className='w-[80px] h-[80px] rounded-[50%] bg-gray-500'></div>
-                                <div>
-                                    <h2 className='font-bold text-[20px]'>Сабинина Мама</h2>
-                                    <p className='text-green-400 flex gap-[10px] items-center'>Online <div className='w-[10px] h-[10px] bg-green-400 rounded-full'></div></p>
-                                </div>
-                            </div>
+                            <ul className="space-y-5">
+                                {users.map((user, idx) => (
+                                    <li key={idx} onClick={() => setSelectedUser(users[idx])} className="flex items-center space-x-4 hover:bg-[#ffffff5d] w-full rounded-2xl cursor-pointer">
+                                        <img className='w-[50px] h-[50px] rounded-full' src={user.photoURL} alt="" />
+                                        <p className="text-[16px] font-medium">{user.name}</p>
+                                    </li>
+                                ))}
+                            </ul>
 
                         </div>
 
@@ -70,69 +101,47 @@ const Chat = () => {
 
                     <div className='border-white w-[100%] px-[20px]'>
                         <nav className='w-[100%] h-[90px] flex justify-between items-center px-[50px] mb-[50px] border-b border-gray-300'>
-                            <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
-                                <div className='w-[50px] h-[50px] rounded-[50%] bg-gray-500'></div>
-                                <div>
-                                    <h2 className='font-bold text-[20px] flex gap-[10px] items-center'>Сабинина Мама <div className='w-[15px] h-[15px] bg-green-400 rounded-full'></div></h2>
-                                </div>
-                            </div>
+                            {
+                                selectedUser ? (
+                                    <div className="text-white w-[100%] rounded-[16px] flex gap-[10px] items-center h-[90px] hover:bg-white/10 hover:backdrop-blur-md">
+                                        <img className='w-[50px] h-[50px] rounded-full' src={selectedUser.photoURL} alt="" />
+                                        <div>
+                                            <h2 className='font-bold text-[20px] flex gap-[10px] items-center'>{selectedUser.name} <div className='w-[15px] h-[15px] bg-green-400 rounded-full'></div></h2>
+                                        </div>
+                                    </div>
+                                ) : ""
+                            }
                             <GoInfo className='w-[50px] h-[50px] text-white' />
                         </nav>
 
                         <div className='flex  flex-col justify-between h-[80%]'>
                             <div className=' overflow-auto'>
-                                <div>
-                                    <div className="max-w-md p-3 ml-[50px] rounded-t-2xl rounded-br-2xl bg-white/10 backdrop-blur-md text-white text-sm shadow-inner border border-white/10">
-                                        Я Сабинина Мама 💀
-                                    </div>
-                                    <div className='w-[50px] h-[50px] bg-gray-500 rounded-full'></div>
-                                </div>
-                                <div>
-                                    <div className="max-w-md p-3 ml-[50px] rounded-t-2xl rounded-br-2xl bg-white/10 backdrop-blur-md text-white text-sm shadow-inner border border-white/10">
-                                        Я Сабинина Мама 💀
-                                    </div>
-                                    <div className='w-[50px] h-[50px] bg-gray-500 rounded-full'></div>
-                                </div>
-                                <div>
-                                    <div className="max-w-md p-3 ml-[50px] rounded-t-2xl rounded-br-2xl bg-white/10 backdrop-blur-md text-white text-sm shadow-inner border border-white/10">
-                                        Я Сабинина Мама 💀
-                                    </div>
-                                    <div className='w-[50px] h-[50px] bg-gray-500 rounded-full'></div>
-                                </div>
-                                <div>
-                                    <div className="max-w-md p-3 ml-[50px] rounded-t-2xl rounded-br-2xl bg-white/10 backdrop-blur-md text-white text-sm shadow-inner border border-white/10">
-                                        Я Сабинина Мама 💀
-                                    </div>
-                                    <div className='w-[50px] h-[50px] bg-gray-500 rounded-full'></div>
-                                </div>
-                                <div>
-                                    <div className="max-w-md p-3 ml-[50px] rounded-t-2xl rounded-br-2xl bg-white/10 backdrop-blur-md text-white text-sm shadow-inner border border-white/10">
-                                        Я Сабинина Мама 💀
-                                    </div>
-                                    <div className='w-[50px] h-[50px] bg-gray-500 rounded-full'></div>
-                                </div>
-                                <div>
-                                    <div className="max-w-md p-3 ml-[50px] rounded-t-2xl rounded-br-2xl bg-white/10 backdrop-blur-md text-white text-sm shadow-inner border border-white/10">
-                                        Я Сабинина Мама 💀
-                                    </div>
-                                    <div className='w-[50px] h-[50px] bg-gray-500 rounded-full'></div>
-                                </div>
 
-                                <div className='flex justify-end'>
-                                    <div className='content-end'>
-                                        <div className="max-w-md p-3 mr-[50px] rounded-t-2xl rounded-bl-2xl bg-white/10 backdrop-blur-md text-white text-sm shadow-inner border border-white/10">
-                                            Я тоже  💀
+                                {chat
+                                    .filter(
+                                        (msg) =>
+                                            (msg.from === user.uid && msg.to === selectedUser?.uid) ||
+                                            (msg.from === selectedUser?.uid && msg.to === user.uid)
+                                    )
+                                    .map((msg, index) => (
+                                        <div
+                                            key={index}
+                                            className={`flex ${msg.from === user.uid ? "justify-end" : "justify-start"
+                                                }`}
+                                        >
+                                            <div className="max-w-md p-3 rounded-t-2xl bg-white/10 text-white text-sm shadow-inner border border-white/10 m-2">
+                                                <p>{msg.text}</p>
+                                                <span className="text-xs opacity-70">{msg.time}</span>
+                                            </div>
                                         </div>
-                                        <div className='w-[50px] h-[50px] ml-[170px] bg-gray-500 rounded-full'></div>
-                                    </div>
-                                </div>
+                                    ))}
                             </div>
 
-                            <div className='h-[80px] w-[90%] flex gap-[20px] relative'>
+                            <form onSubmit={sendMessage} className='h-[80px] w-[90%] flex gap-[20px] relative'>
                                 <ImFilePicture className='absolute top-[15px] right-[100px] text-[20px] text-white' />
-                                <input type="text" className='text-white border-0 bg-white/20 w-[100%] h-[50px] rounded-[20px] pl-[40px] mb-[50px] focus:outline-0' placeholder='Send a message...' />
+                                <input value={message} onChange={(e) => setMessage(e.target.value)} type="text" className='text-white border-0 bg-white/20 w-[100%] h-[50px] rounded-[20px] pl-[40px] mb-[50px] focus:outline-0' placeholder='Send a message...' />
                                 <button className='bg-violet-500 text-white w-[50px] h-[50px] rounded-full flex justify-center items-center text-[24px]'><IoIosSend /></button>
-                            </div>
+                            </form>
                         </div>
 
                     </div>
