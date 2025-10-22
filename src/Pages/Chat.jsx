@@ -6,6 +6,9 @@ import { ImFilePicture } from "react-icons/im";
 import background from './../assets/Img/183.png';
 import { Link } from 'react-router';
 const Chat = () => {
+    const Chat = () =>{
+    
+    }
     return (
         <>
             <div className="bg-cover bg-center" style={{ backgroundImage: `url(${background})` }}>
